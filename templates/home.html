@@ -1,17 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-    <title>Home</title>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Inventory Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='dashboard.css') }}">
 
 </head>
 
 <body>
 
-    <h1>Welcome {{ session['user'] }}</h1>
+<div class="container">
 
-    <a href="/logout">Logout</a>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>Inventory</h2>
+
+            <p>Management System</p>
+
+        </div>
+
+        <ul>
+
+            <li><a href="#">🏠 Dashboard</a></li>
+
+            <li><a href="#">📦 Products</a></li>
+
+            <li><a href="#">📂 Categories</a></li>
+
+            <li><a href="#">🚚 Suppliers</a></li>
+
+            <li><a href="#">👥 Customers</a></li>
+
+            <li><a href="#">📥 Stock In</a></li>
+
+            <li><a href="#">📤 Stock Out</a></li>
+
+            <li><a href="#">📊 Reports</a></li>
+
+            <li><a href="#">⚙ Settings</a></li>
+
+            <li><a href="/logout">🚪 Logout</a></li>
+
+        </ul>
+
+    </aside>
+
+    <!-- Main Content -->
+
+    <div class="main-content">
+
+        <!-- Navbar -->
+
+        <header class="navbar">
+
+            <h2>Dashboard</h2>
+
+            <div class="user">
+
+                Welcome {{ session['user'] }}
+
+            </div>
+
+        </header>
+
+    </div>
+
+</div>
 
 </body>
 

@@ -24,7 +24,7 @@ def register():
         #Username check
         res = con.cursor()
         sql = 'select * from users where username=?'
-        value = (username)
+        value = (username,)
         res.execute(sql,value)
         user = fetch_one_dict(res)
 
@@ -45,6 +45,7 @@ def register():
     return render_template('register.html')
 
 #Login Routes
+@auth_bp.route('/', methods=['GET','POST'])
 @auth_bp.route('/login', methods=['GET','POST'])
 def login():
 
@@ -77,22 +78,7 @@ def login():
             )
         session["user"] = user["username"]
 
-        return redirect(url_for("auth.home"))
+        return redirect(url_for("dashboard.home"))
 
     return render_template("login.html")
 
-@auth_bp.route("/")
-def home():
-
-    if "user" not in session:
-        return redirect(url_for("auth.login"))
-
-    return render_template("home.html")
-
-
-@auth_bp.route("/logout")
-def logout():
-
-    session.clear()
-
-    return redirect(url_for("auth.login"))
