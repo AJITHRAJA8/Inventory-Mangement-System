@@ -16,66 +16,246 @@
 
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
+        <!-- Sidebar -->
+        <aside class="sidebar">
 
-        <div class="logo">
+            <div class="logo">
 
-            <h2>Inventory</h2>
+                <h2>Inventory</h2>
 
-            <p>Management System</p>
-
-        </div>
-
-        <ul>
-
-            <li><a href="#">🏠 Dashboard</a></li>
-
-            <li><a href="#">📦 Products</a></li>
-
-            <li><a href="#">📂 Categories</a></li>
-
-            <li><a href="#">🚚 Suppliers</a></li>
-
-            <li><a href="#">👥 Customers</a></li>
-
-            <li><a href="#">📥 Stock In</a></li>
-
-            <li><a href="#">📤 Stock Out</a></li>
-
-            <li><a href="#">📊 Reports</a></li>
-
-            <li><a href="#">⚙ Settings</a></li>
-
-            <li><a href="/logout">🚪 Logout</a></li>
-
-        </ul>
-
-    </aside>
-
-    <!-- Main Content -->
-
-    <div class="main-content">
-
-        <!-- Navbar -->
-
-        <header class="navbar">
-
-            <h2>Dashboard</h2>
-
-            <div class="user">
-
-                Welcome {{ session['user'] }}
+                <p>Management System</p>
 
             </div>
 
-        </header>
+            <ul>
 
+                <li><a href="#">🏠 Dashboard</a></li>
+
+                <li><a href="#">📦 Products</a></li>
+
+                <li><a href="#">📂 Categories</a></li>
+
+                <li><a href="#">🚚 Suppliers</a></li>
+
+                <li><a href="#">👥 Customers</a></li>
+
+                <li><a href="#">📥 Stock In</a></li>
+
+                <li><a href="#">📤 Stock Out</a></li>
+
+                <li><a href="#">📊 Reports</a></li>
+
+                <li><a href="#">⚙ Settings</a></li>
+
+                <li><a href="/logout">🚪 Logout</a></li>
+
+            </ul>
+
+        </aside>
+
+        <!-- Main Content -->
+
+        <div class="main-content">
+
+            <!-- Navbar -->
+
+            <header class="navbar">
+
+                <h2>Dashboard</h2>
+
+                <div class="user">
+
+                    Welcome {{ session['user'] }}
+
+                </div>
+
+            </header>
+
+
+            <!--Card-->
+            <div class="dashboard">
+
+                <div class="card">
+
+                    <h3>Total Products</h3>
+
+                    <h1>120</h1>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>In Stock</h3>
+
+                    <h1>98</h1>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Low Stock</h3>
+
+                    <h1>15</h1>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Out of Stock</h3>
+
+                    <h1>7</h1>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Total Suppliers</h3>
+
+                    <h1>25</h1>
+
+                </div>
+
+            </div>
+
+            <!--Stock In Table-->
+            <div class="content-row">
+
+                <div class="table-box">
+
+                    <div class="table-header">
+
+                        <h3>Recent Stock In</h3>
+
+                    </div>
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Product</th>
+                                <th>Supplier</th>
+                                <th>Date</th>
+                                <th>Quantity</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+
+                                <td>Wireless Mouse</td>
+                                <td>Tech Solutions</td>
+                                <td>01-07-2026</td>
+                                <td>25</td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td>Keyboard</td>
+                                <td>Prime Electronics</td>
+                                <td>30-06-2026</td>
+                                <td>15</td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td>Monitor</td>
+                                <td>Digital World</td>
+                                <td>29-06-2026</td>
+                                <td>10</td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+            <!--Low Stock Alert-->
+            <div class="alert-box">
+
+                <div class="table-header">
+
+                    <h3>Low Stock Alert</h3>
+
+                </div>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Image</th>
+                            <th>Product</th>
+                            <th>Stock</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+                                <img src="{{ url_for('static', filename='images/mouse.jpg') }}" class="product-img">
+                            </td>
+
+                            <td>Wireless Mouse</td>
+
+                            <td>
+                                <span class="low-stock">2</span>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>
+                                <img src="{{ url_for('static', filename='images/keyboard.jpg') }}" class="product-img">
+                            </td>
+
+                            <td>Keyboard</td>
+
+                            <td>
+                                <span class="low-stock">1</span>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>
+                                <img src="{{ url_for('static', filename='images/router.jpg') }}" class="product-img">
+                            </td>
+
+                            <td>Router</td>
+
+                            <td>
+                                <span class="low-stock">3</span>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
     </div>
-
-</div>
 
 </body>
 
