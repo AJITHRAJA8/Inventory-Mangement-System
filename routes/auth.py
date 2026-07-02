@@ -83,3 +83,9 @@ def login():
 
     return render_template("login.html")
 
+#Logout Route
+@auth_bp.route('/logout')
+def logout():
+    session.pop('user',None)
+    return redirect(url_for('auth.login'))
+

@@ -45,7 +45,13 @@
 
     <div class="card">
 
-        <h2>Category Information</h2>
+        <h2 >Category Information</h2>
+
+        {% if error %}
+        <div class="error-message">
+            {{error}}
+        </div>
+        {% endif %}
 
         <form method="POST">
 
@@ -60,6 +66,7 @@
                 <input
                     type="text"
                     name="category_name"
+                    value="{{ category_name if category_name else '' }}"
                     placeholder="Example : Electronics"
                     required>
 
@@ -76,7 +83,7 @@
                 <textarea
                     name="description"
                     rows="5"
-                    placeholder="Example : Electronic devices and accessories"></textarea>
+                    placeholder="Example : Electronic devices and accessories">{{ description if description else '' }}</textarea>
 
             </div>
 

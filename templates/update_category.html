@@ -52,6 +52,13 @@
 
         <h2>Category Information</h2>
 
+        {% if error %}
+
+        <div class="error-message">
+            {{error}}
+        </div>
+        {% endif %}
+
         <form  method="POST">
 
             <div class="input-group">
