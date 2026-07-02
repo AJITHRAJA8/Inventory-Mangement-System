@@ -1,9 +1,11 @@
-from flask import Blueprint, render_template, session, redirect, url_for
+from flask import Blueprint, render_template, session, redirect, url_for,request
 from database import con
 from helpers import fetch_all_dict,fetch_one_dict
 
+#Blueprint for category routes
 category_bp = Blueprint('category',__name__)
 
+#Route for category page
 @category_bp.route('/category',methods=['GET','POST'])
 def category():
 
@@ -16,3 +18,51 @@ def category():
     result=fetch_all_dict(res)
     return render_template('category.html',datas=result)
 
+#Route for adding a new category
+@category_bp.route('/add_category',methods=['GET','POST'])
+def add_category():
+
+    if 'user' not in session:
+        return redirect(url_for('auth.login'))
+    
+    if request.method == 'POST':
+
+        category_name = request.form['category_name']
+        description = request.form['description']
+
+        res = con.cursor()
+        sql = 'insert into category(category_name,description) values(?,?)'
+        values = (category_name, description)
+        res.execute(sql, values)
+        con.commit()
+        return redirect(url_for('category.category'))
+    return render_template('add_category.html')
+
+#Route for editing a category
+@category_bp.route('/update_category/<int:category_id>',methods=['GET','POST'])
+def update_category(category_id):
+
+    if 'user' not in session:
+        return redirect(url_for('auth.login'))
+    
+    if request.method == 'POST':
+        
+        category_name = request.form['category_name']
+        description = request.form['description']
+
+        res = con.cursor()
+        sql = 'update category set category_name=?, description=? where category_id=?'
+        value = (category_name,description,category_id)
+        res.execute(sql,value)
+        con.commit()
+        return redirect(url_for('category.category'))
+    
+    #display the current category data in the form
+    res=con.cursor()
+    sql='select * from category where category_id = ?'
+    value=(category_id,)
+    res.execute(sql,value)
+    result=fetch_one_dict(res)
+    return render_template('update_category.html',data=result)
+
+#Route for deleting a category

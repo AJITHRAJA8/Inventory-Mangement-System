@@ -5,10 +5,9 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Add Category</title>
+    <title>Update Category</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='category.css') }}">
@@ -25,19 +24,25 @@
 
         Dashboard >
 
+        Inventory >
+
         Category >
 
-        <span>Add Category</span>
+        <span>Update Category</span>
 
     </div>
 
-    <!-- Page Title -->
+    <!-- Title -->
 
     <div class="page-title">
 
-        <h1>📂 Add New Category</h1>
+        <div>
 
-        <p>Create a new category to organize your inventory products.</p>
+            <h1>✏️ Update Category</h1>
+
+            <p>Update the selected category information.</p>
+
+        </div>
 
     </div>
 
@@ -47,36 +52,27 @@
 
         <h2>Category Information</h2>
 
-        <form method="POST">
+        <form  method="POST">
 
             <div class="input-group">
 
-                <label>
-
-                    Category Name *
-
-                </label>
+                <label>Category Name *</label>
 
                 <input
                     type="text"
                     name="category_name"
-                    placeholder="Example : Electronics"
+                    value="{{ data.category_name }}"
                     required>
 
             </div>
 
             <div class="input-group">
 
-                <label>
-
-                    Description
-
-                </label>
+                <label>Description</label>
 
                 <textarea
                     name="description"
-                    rows="5"
-                    placeholder="Example : Electronic devices and accessories"></textarea>
+                    rows="5">{{ data.description }}</textarea>
 
             </div>
 
@@ -84,7 +80,7 @@
 
                 <button class="save-btn">
 
-                    💾 Save Category
+                    💾 Update Category
 
                 </button>
 

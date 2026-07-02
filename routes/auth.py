@@ -5,6 +5,7 @@ from helpers import fetch_all_dict, fetch_one_dict
 
 auth_bp = Blueprint('auth',__name__)
 
+#Resister Routes
 @auth_bp.route('/register', methods=['GET','POST'])
 def register():
 

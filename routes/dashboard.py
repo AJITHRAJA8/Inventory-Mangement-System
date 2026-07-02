@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, session, redirect, url_for
 
 dashboard_db = Blueprint("dashboard", __name__)
 
+
 @dashboard_db.route("/home")
 def home():
 

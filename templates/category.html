@@ -16,28 +16,62 @@
 
 <body>
 
-<div class="container">
+<div class="page">
 
-    <div class="header">
+    <!-- Breadcrumb -->
 
-        <h2>Category Management</h2>
+    <div class="breadcrumb">
 
-        <a href="/add_category" class="add-btn">
+        Dashboard >
 
-            + Add Category
+        Inventory >
 
-        </a>
+        <span>Categories</span>
 
     </div>
 
-    <div class="search-box">
+    <!-- Page Title -->
+
+    <div class="page-title">
+
+        <div>
+
+            <h1>📂 Category Management</h1>
+
+            <p>
+                Manage all product categories in your inventory system.
+            </p>
+
+        </div>
+
+        <div class="page-action">
+
+            <a href="/home" class="back-btn">
+
+                🏠 Dashboard
+
+            </a>
+
+            <a href="/add_category" class="add-btn">
+
+                ➕ Add Category
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Search -->
+
+    <div class="search-card">
 
         <form action="/category" method="GET">
 
             <input
                 type="text"
                 name="search"
-                placeholder="Search Category">
+                placeholder="🔍 Search category...">
 
             <button type="submit">
 
@@ -49,51 +83,109 @@
 
     </div>
 
-    <table action="/category">
+    <!-- Table -->
 
-        <thead>
+    <div class="table-card">
 
-            <tr>
+        <table>
 
-                <th>ID</th>
+            <thead>
 
-                <th>Category Name</th>
+                <tr>
 
-                <th>Description</th>
+                    <th>ID</th>
 
-                <th>Action</th>
+                    <th>Category Name</th>
 
-            </tr>
+                    <th>Description</th>
 
-        </thead>
+                    <th>Action</th>
 
-        <tbody>
-            {% for row in datas %}
+                </tr>
 
-            <tr>
+            </thead>
 
-                <td>{{ row.category_id }}</td>
+            <tbody>
 
-                <td>{{ row.category_name }}</td>
+                {% if datas %}
 
-                <td>{{ row.description }}</td>
+                    {% for row in datas %}
 
-                <td>
+                        <tr>
 
-                    <a href="#">Edit</a>
+                            <td>{{ row.category_id }}</td>
 
-                    |
+                            <td>{{ row.category_name }}</td>
 
-                    <a href="#">Delete</a>
+                            <td>{{ row.description }}</td>
 
-                </td>
+                             <td>
 
-            </tr>
-            {% endfor %}
+                                <a href="/update_category/{{ row.category_id }}"
+                                    class="edit-btn">
 
-        </tbody>
+                                    ✏ Edit
 
-    </table>
+                                </a>
+
+                                <a href="/delete_category/{{ row.category_id }}"
+                                    class="delete-btn">
+
+                                    🗑 Delete
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                        {% else %}
+
+                    <tr>
+
+                    <td colspan="4" class="empty-data">
+
+                        <h3>📂 No Categories Found</h3>
+
+                        <p>Create your first category to start managing products.</p>
+
+                    </td>
+
+                    </tr>
+
+                {% endif %}
+
+            </tbody>
+        </table>
+
+    </div>
+    <!-- Pagination -->
+
+    <div class="pagination">
+
+        <div class="page-info">
+
+            Showing 1 to 10 of 50 Categories
+
+        </div>
+
+        <div class="page-number">
+
+            <a href="#">Previous</a>
+
+            <a href="#" class="active">1</a>
+
+            <a href="#">2</a>
+
+            <a href="#">3</a>
+
+            <a href="#">Next</a>
+
+        </div>
+
+    </div>
 
 </div>
 
