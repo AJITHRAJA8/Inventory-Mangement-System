@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, session, redirect, url_for,request
 from database import con
 from helpers import fetch_all_dict,fetch_one_dict
+from routes.auth import login
 
 #Blueprint for category routes
 category_bp = Blueprint('category',__name__)
@@ -66,3 +67,67 @@ def update_category(category_id):
     return render_template('update_category.html',data=result)
 
 #Route for deleting a category
+@category_bp.route('/delete_category/<int:category_id>',methods=['GET','POST'])
+def delete_category(category_id):
+
+    if 'user' not in session:
+        return redirect(url_for('auth.login'))
+    
+    if request.method == 'POST':
+
+        res=con.cursor()
+        sql = 'delete from category where category_id = ?'
+        value = (category_id,)
+        res.execute(sql,value)
+        con.commit()
+        return redirect(url_for('category.category'))
+    
+    #show the delete confirmation page
+    res=con.cursor()
+    sql = 'select * from category where category_id = ?'
+    value =(category_id,)
+    res.execute(sql,value)
+    result = fetch_one_dict(res)
+    return render_template('delete_category.html', data=result)
+
+# Route for searching categories
+@category_bp.route('/search_category', methods=['GET', 'POST'])
+def search_category():
+
+    if 'user' not in session:
+        return redirect(url_for('auth.login'))
+
+    search = request.args.get('search')
+
+    res = con.cursor()
+
+    if search:
+
+        sql = """
+        SELECT *
+        FROM category
+        WHERE category_name LIKE ?
+        ORDER BY category_id
+        """
+
+        value = ('%' + search + '%',)
+
+        res.execute(sql, value)
+
+    else:
+
+        sql = """
+        SELECT *
+        FROM category
+        ORDER BY category_id
+        """
+
+        res.execute(sql)
+
+    result = fetch_all_dict(res)
+
+    return render_template(
+        'category.html',
+        datas=result,
+        search=search
+    )

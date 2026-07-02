@@ -66,12 +66,13 @@
 
     <div class="search-card">
 
-        <form action="/category" method="GET">
+        <form action="/search_category" method="GET">
 
             <input
                 type="text"
                 name="search"
-                placeholder="🔍 Search category...">
+                placeholder="🔍 Search category..."
+                value="{{ search if search else '' }}">
 
             <button type="submit">
 

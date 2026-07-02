@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Delete Category</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='category.css') }}">
+
+</head>
+
+<body>
+
+<div class="page">
+
+    <div class="breadcrumb">
+
+        Dashboard >
+
+        Inventory >
+
+        Category >
+
+        <span>Delete Category</span>
+
+    </div>
+
+    <div class="page-title">
+
+        <div>
+
+            <h1>🗑 Delete Category</h1>
+
+            <p>
+                Confirm before permanently deleting this category.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Delete Confirmation</h2>
+
+        <div class="delete-message">
+
+            <h3>
+
+                Are you sure?
+
+            </h3>
+
+            <p>
+
+                You are about to delete this category.
+
+            </p>
+
+            <div class="delete-info">
+
+                <strong>Category :</strong>
+
+                {{ data.category_name }}
+
+            </div>
+
+            <div class="delete-info">
+
+                <strong>Description :</strong>
+
+                {{ data.description }}
+
+            </div>
+
+            <p class="warning">
+
+                ⚠ This action cannot be undone.
+
+            </p>
+
+        </div>
+
+        <form method="POST">
+
+            <div class="button-group">
+
+                <button class="delete-btn">
+
+                    🗑 Delete
+
+                </button>
+
+                <a href="/category"
+
+                   class="back-btn">
+
+                    ← Cancel
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
