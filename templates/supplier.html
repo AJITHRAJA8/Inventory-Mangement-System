@@ -75,7 +75,7 @@
 
     <div class="search-card">
 
-        <form action="/category" method="GET">
+        <form action="/supplier" method="GET">
 
             <input
                 type="text"
@@ -185,6 +185,69 @@
 
             </tbody>
         </table>
+        <!-- Pagination -->
+
+        <div class="pagination">
+
+            <div class="page-info">
+
+                Showing Page {{ current_page }} of {{ total_pages }}
+
+            </div>
+
+            <div class="page-number">
+
+            <!-- Previous -->
+
+            {% if current_page > 1 %}
+
+            <a href="{{ url_for('supplier.supplier',
+                            page=current_page-1,
+                            search=search) }}">
+
+                Previous
+
+            </a>
+
+            {% endif %}
+
+            <!-- Page Numbers -->
+
+            {% for i in range(1, total_pages + 1) %}
+
+            <a href="{{ url_for('supplier.supplier',
+                            page=i,
+                            search=search) }}"
+
+                {% if i == current_page %}
+
+                    class="active"
+
+                {% endif %}>
+
+                    {{ i }}
+
+            </a>
+
+            {% endfor %}
+
+            <!-- Next -->
+
+            {% if current_page < total_pages %}
+
+            <a href="{{ url_for('supplier.supplier',
+                            page=current_page+1,
+                            search=search) }}">
+
+                    Next
+
+            </a>
+
+            {% endif %}
+
+            </div>
+
+        </div>
 
     </div>
 

@@ -1,0 +1,726 @@
+/* ==========================================
+   Supplier Management System
+   Part 1
+   ========================================== */
+
+/* ==========================
+   Global
+========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+
+    background:#f0fdfa;
+    color:#1e293b;
+
+}
+
+.page{
+
+    width:92%;
+    max-width:1300px;
+    margin:35px auto;
+
+}
+
+/* ==========================
+   Breadcrumb
+========================== */
+
+.breadcrumb{
+
+    font-size:14px;
+    color:#64748b;
+    margin-bottom:18px;
+
+}
+
+.breadcrumb span{
+
+    color:#0f766e;
+    font-weight:600;
+
+}
+
+/* ==========================
+   Page Title
+========================== */
+
+.page-title{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+
+}
+
+.page-title h1{
+
+    font-size:38px;
+    color:#0f766e;
+    margin-bottom:8px;
+
+}
+
+.page-title p{
+
+    color:#64748b;
+    font-size:16px;
+
+}
+
+/* ==========================
+   Buttons
+========================== */
+
+.page-action{
+
+    display:flex;
+    gap:15px;
+
+}
+
+.add-btn{
+
+    background:#0f766e;
+    color:#fff;
+    text-decoration:none;
+    padding:14px 24px;
+    border-radius:10px;
+    font-weight:bold;
+    transition:.3s;
+
+}
+
+.add-btn:hover{
+
+    background:#115e59;
+
+}
+
+.back-btn{
+
+    background:#64748b;
+    color:white;
+    text-decoration:none;
+    padding:14px 24px;
+    border-radius:10px;
+    font-weight:bold;
+    transition:.3s;
+
+}
+
+.back-btn:hover{
+
+    background:#475569;
+
+}
+
+/* ==========================
+   Search Card
+========================== */
+
+.search-card{
+
+    background:white;
+    border-radius:15px;
+    border:1px solid #d1fae5;
+    box-shadow:0 8px 20px rgba(15,118,110,.08);
+    padding:20px;
+    margin-bottom:25px;
+
+}
+
+.search-card form{
+
+    display:flex;
+    gap:15px;
+
+}
+
+.search-card input{
+
+    flex:1;
+    padding:14px 18px;
+    border:2px solid #99f6e4;
+    border-radius:10px;
+    font-size:15px;
+    transition:.3s;
+
+}
+
+.search-card input:focus{
+
+    outline:none;
+    border-color:#0f766e;
+    box-shadow:0 0 0 4px rgba(15,118,110,.15);
+
+}
+
+.search-card button{
+
+    background:#0f766e;
+    color:white;
+    border:none;
+    padding:14px 28px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:bold;
+    transition:.3s;
+
+}
+
+.search-card button:hover{
+
+    background:#115e59;
+
+}
+
+/* ==========================
+   Table Card
+========================== */
+
+.table-card{
+
+    background:white;
+    border-radius:15px;
+    border:1px solid #d1fae5;
+    box-shadow:0 8px 20px rgba(15,118,110,.08);
+    overflow:hidden;
+
+}
+
+/* ==========================
+   Table
+========================== */
+
+table{
+
+    width:100%;
+    border-collapse:collapse;
+
+}
+
+table th{
+
+    background:#ccfbf1;
+    color:#134e4a;
+    padding:18px;
+    text-align:left;
+    font-size:15px;
+
+}
+
+table td{
+
+    padding:18px;
+    border-bottom:1px solid #e5e7eb;
+    color:#475569;
+    vertical-align:middle;
+
+}
+
+table tbody tr{
+
+    transition:.25s;
+
+}
+
+table tbody tr:hover{
+
+    background:#ecfdf5;
+
+}
+
+/* ==========================
+   Action Buttons
+========================== */
+
+.action-buttons{
+
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    align-items:center;
+    white-space:nowrap;
+
+}
+
+.edit-btn{
+
+    background:#dbeafe;
+    color:#2563eb;
+    text-decoration:none;
+    padding:9px 15px;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:600;
+    transition:.3s;
+
+}
+
+.edit-btn:hover{
+
+    background:#bfdbfe;
+
+}
+
+.delete-btn{
+
+    background:#fee2e2;
+    color:#dc2626;
+    text-decoration:none;
+    padding:9px 15px;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:600;
+    transition:.3s;
+
+}
+
+.delete-btn:hover{
+
+    background:#fecaca;
+
+}
+
+/* ==========================
+   Empty Data
+========================== */
+
+.empty-data{
+
+    text-align:center;
+    padding:60px 20px;
+
+}
+
+.empty-data h3{
+
+    color:#0f766e;
+    margin-bottom:10px;
+
+}
+
+.empty-data p{
+
+    color:#64748b;
+
+}
+/* ==========================================
+   Supplier Management System
+   Part 2
+   ========================================== */
+
+/* ==========================
+   Form Card
+========================== */
+
+.card{
+
+    background:white;
+
+    border:1px solid #d1fae5;
+
+    border-radius:15px;
+
+    padding:35px;
+
+    box-shadow:0 8px 20px rgba(15,118,110,.08);
+
+}
+
+.card h2{
+
+    color:#134e4a;
+
+    margin-bottom:30px;
+
+    padding-bottom:15px;
+
+    border-bottom:1px solid #d1fae5;
+
+}
+
+/* ==========================
+   Form
+========================== */
+
+.input-group{
+
+    margin-bottom:25px;
+
+}
+
+.input-group label{
+
+    display:block;
+
+    margin-bottom:10px;
+
+    font-weight:600;
+
+    color:#134e4a;
+
+}
+
+.input-group input,
+.input-group textarea,
+.input-group select{
+
+    width:100%;
+
+    padding:14px;
+
+    border:2px solid #99f6e4;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+    transition:.3s;
+
+    background:white;
+
+}
+
+.input-group input:focus,
+.input-group textarea:focus,
+.input-group select:focus{
+
+    outline:none;
+
+    border-color:#0f766e;
+
+    box-shadow:0 0 0 4px rgba(15,118,110,.15);
+
+}
+
+textarea{
+
+    resize:none;
+
+    min-height:120px;
+
+}
+
+/* ==========================
+   Form Buttons
+========================== */
+
+.button-group{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:35px;
+
+}
+
+.save-btn{
+
+    background:#0f766e;
+
+    color:white;
+
+    border:none;
+
+    padding:14px 30px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.save-btn:hover{
+
+    background:#115e59;
+
+}
+
+/* ==========================
+   Delete Page
+========================== */
+
+.delete-message{
+    text-align:center;
+}
+.delete-message h3{
+    color:#dc2626;
+    font-size:30px;
+    margin-bottom:15px;
+}
+.delete-message p{
+    color:#64748b;
+    margin-bottom:20px;
+}
+.delete-info{
+    background:#fef2f2;
+    border:1px solid #fecaca;
+    border-left:6px solid #dc2626;
+    border-radius:12px;
+    padding:20px;
+    text-align:left;
+    margin:25px 0;
+}
+.delete-info p{
+    margin:12px 0;
+    color:#374151;
+    font-size:16px;
+}
+.delete-info strong{
+    color:#111827;
+    display:inline-block;
+    width:150px;
+}
+.warning{
+    color:#dc2626;
+    font-size:17px;
+    font-weight:bold;
+    margin-top:20px;
+}
+
+/* ==========================
+   Error Message
+========================== */
+
+.error-message{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+    padding:15px;
+
+    margin-bottom:25px;
+
+    border-left:5px solid #dc2626;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+}
+
+/* ==========================
+   Flash Messages
+========================== */
+
+.flash-message{
+
+    padding:15px;
+
+    margin-bottom:20px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+}
+
+.flash-message.success{
+
+    background:#dcfce7;
+
+    color:#166534;
+
+    border-left:5px solid #22c55e;
+
+}
+
+.flash-message.error{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+    border-left:5px solid #ef4444;
+
+}
+
+/* ==========================
+   Pagination
+========================== */
+
+.pagination{
+
+    margin-top:25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.page-info{
+
+    color:#64748b;
+
+    font-size:15px;
+
+}
+
+.page-number{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+.page-number a{
+
+    text-decoration:none;
+
+    background:white;
+
+    color:#134e4a;
+
+    padding:10px 16px;
+
+    border-radius:8px;
+
+    border:1px solid #99f6e4;
+
+    transition:.3s;
+
+}
+
+.page-number a:hover{
+
+    background:#0f766e;
+
+    color:white;
+
+}
+
+.page-number .active{
+
+    background:#0f766e;
+
+    color:white;
+
+}
+
+/* ==========================
+   Responsive
+========================== */
+
+@media(max-width:992px){
+
+    .page-title{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:20px;
+
+    }
+
+    .page-action{
+
+        width:100%;
+
+        flex-wrap:wrap;
+
+    }
+
+    .search-card form{
+
+        flex-direction:column;
+
+    }
+
+    .button-group{
+
+        flex-direction:column;
+
+    }
+
+    .button-group a,
+    .button-group button{
+
+        width:100%;
+
+        text-align:center;
+
+    }
+
+    .action-buttons{
+
+        flex-direction:column;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .page{
+
+        width:96%;
+
+    }
+
+    table{
+
+        display:block;
+
+        overflow-x:auto;
+
+        white-space:nowrap;
+
+    }
+
+    .page-title h1{
+
+        font-size:30px;
+
+    }
+
+}
+
+@media(max-width:576px){
+
+    .page-title h1{
+
+        font-size:26px;
+
+    }
+
+    .add-btn,
+    .back-btn,
+    .save-btn{
+
+        width:100%;
+
+        text-align:center;
+
+    }
+
+    .page-action{
+
+        flex-direction:column;
+
+    }
+
+}

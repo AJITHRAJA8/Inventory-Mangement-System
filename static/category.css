@@ -1,6 +1,6 @@
-/* ===========================
+/* 
    Global
-=========================== */
+ */
 
 *{
     margin:0;
@@ -10,8 +10,11 @@
 }
 
 body{
-    background:#f4f7fc;
+
+    background:#dfe7fd;
+
     color:#1e293b;
+
 }
 
 .page{
@@ -471,27 +474,60 @@ table{
 }
 }
 /*Pagination*/
+
 .pagination{
-    margin-top:25px;
+
+    margin-top:30px;
+
+    background:white;
+
+    padding:20px 25px;
+
+    border-radius:15px;
+
+    box-shadow:0 5px 18px rgba(0,0,0,.08);
 
     display:flex;
 
     justify-content:space-between;
 
     align-items:center;
+
 }
+
 .page-info{
+
     color:#64748b;
+
     font-size:15px;
+
+    font-weight:600;
+
 }
+
 .page-number{
 
     display:flex;
 
+    align-items:center;
+
     gap:10px;
 
 }
+
 .page-number a{
+
+    min-width:42px;
+
+    height:42px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:0 16px;
 
     text-decoration:none;
 
@@ -499,27 +535,68 @@ table{
 
     color:#334155;
 
-    padding:10px 16px;
+    border:1px solid #e2e8f0;
 
-    border-radius:8px;
+    border-radius:10px;
 
     box-shadow:0 2px 8px rgba(0,0,0,.08);
 
     transition:.3s;
 
+    font-weight:600;
+
 }
+
 .page-number a:hover{
 
     background:#4f46e5;
 
     color:white;
 
+    border-color:#4f46e5;
+
 }
+
 .page-number .active{
 
     background:#4f46e5;
 
     color:white;
+
+    border-color:#4f46e5;
+
+}
+
+/* Previous & Next */
+
+.page-number a:first-child,
+.page-number a:last-child{
+
+    min-width:90px;
+
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+    .pagination{
+
+        flex-direction:column;
+
+        gap:20px;
+
+        text-align:center;
+
+    }
+
+    .page-number{
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+
+    }
 
 }
 /* ==========================
