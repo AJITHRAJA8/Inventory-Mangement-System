@@ -1,47 +1,87 @@
-{% extends "home.html" %}
 
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Supplier Management</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='supplier.css') }}">
+
+</head>
+
+<body>
 
 <div class="page">
 
+    <!-- Breadcrumb -->
+
     <div class="breadcrumb">
 
-        Dashboard > <span>Supplier</span>
+        Dashboard >
+
+        Inventory >
+
+        <span>Suppliers</span>
 
     </div>
+    {% with message = get_flashed_messages(with_categories=true) %}
+        {% if message %}
+            {% for category, msg in message %}
+                <div class="flash-message {{ category }}">
+                    {{ msg }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Page Title -->
 
     <div class="page-title">
 
-        <h1>🏢 Supplier Management</h1>
+        <div>
 
-        <p>Manage all suppliers in your inventory system.</p>
+            <h1>🚚 Supplier Management</h1>
+
+            <p>
+                Manage supplier contacts, companies and business information.
+            </p>
+
+        </div>
+
+        <div class="page-action">
+
+            <a href="/home" class="back-btn">
+
+                🏠 Dashboard
+
+            </a>
+
+            <a href="/add_supplier" class="add-btn">
+
+                ➕ Add supplier
+            </a>
+
+        </div>
 
     </div>
 
-    <div class="page-action">
+    <!-- Search -->
 
-        <a href="{{ url_for('dashboard.home') }}" class="back-btn">
+    <div class="search-card">
 
-            ← Back to Dashboard
-
-        </a>
-
-        <a href="{{ url_for('supplier.add_supplier') }}" class="add-btn">
-
-            + Add Supplier
-
-        </a>
-
-    </div>
-
-    <div class="search-box">
-
-        <form action="{{ url_for('supplier.supplier') }}" method="GET">
+        <form action="/category" method="GET">
 
             <input
                 type="text"
                 name="search"
-                placeholder="Search Supplier">
+                placeholder="🔍 Search supplier..."
+                value="{{ search if search else '' }}">
 
             <button type="submit">
 
@@ -53,60 +93,103 @@
 
     </div>
 
-    <table>
+    <!-- Table -->
 
-        <thead>
+    <div class="table-card">
 
-            <tr>
+        <table>
 
-                <th>ID</th>
+            <thead>
 
-                <th>Supplier Name</th>
+                <tr>
 
-                <th>Company</th>
+                    <th>ID</th>
 
-                <th>Phone</th>
+                    <th>Supplier Name</th>
 
-                <th>Email</th>
+                    <th>Company</th>
 
-                <th>Action</th>
+                    <th>Phone</th>
 
-            </tr>
+                    <th>Email</th>
 
-        </thead>
+                    <th>Address</th>
 
-        <tbody>
+                    <th>Action</th>
 
-            {% for row in datas %}
+                </tr>
 
-            <tr>
+            </thead>
 
-                <td>{{ row.supplier_id }}</td>
+            <tbody>
 
-                <td>{{ row.supplier_name }}</td>
+                {% if datas %}
 
-                <td>{{ row.company_name }}</td>
+                    {% for row in datas %}
 
-                <td>{{ row.phone }}</td>
+                        <tr>
 
-                <td>{{ row.email }}</td>
+                            <td>{{ row.supplier_id }}</td>
 
-                <td>
+                            <td>{{ row.supplier_name }}</td>
 
-                    <a href="#">Edit</a>
+                            <td>{{ row.company_name }}</td>
 
-                    <a href="#">Delete</a>
+                            <td>{{ row.phone }}</td>
 
-                </td>
+                            <td>{{ row.email }}</td>
 
-            </tr>
+                            <td>{{ row.address }}</td>
 
-            {% endfor %}
+                             <td>
 
-        </tbody>
+                                <div class="action-buttons">
 
-    </table>
+                                    <a href="/update_supplier/{{ row.supplier_id }}"
+                                        class="edit-btn">
+
+                                        ✏ Edit
+
+                                    </a>
+
+                                    <a href="/delete_supplier/{{ row.supplier_id }}"
+                                        class="delete-btn">
+
+                                        🗑 Delete
+
+                                    </a>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                        {% else %}
+
+                    <tr>
+
+                    <td colspan="4" class="empty-data">
+
+                        <h3>📂 No suppliers Found</h3>
+
+                        <p>Create your first category to start managing products.</p>
+
+                    </td>
+
+                    </tr>
+
+                {% endif %}
+
+            </tbody>
+        </table>
+
+    </div>
 
 </div>
 
-{% endblock %}
+</body>
+
+</html>

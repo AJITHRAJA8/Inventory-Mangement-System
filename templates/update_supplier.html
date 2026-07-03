@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Update Supplier</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='supplier.css') }}">
+
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- Breadcrumb -->
+
+    <div class="breadcrumb">
+
+        Dashboard >
+
+        Inventory >
+
+        Suppliers >
+
+        <span>Update Supplier</span>
+
+    </div>
+
+    <!-- Page Title -->
+
+    <div class="page-title">
+
+        <div>
+
+            <h1>🚚 Update Supplier</h1>
+
+            <p>Update supplier information.</p>
+
+        </div>
+
+    </div>
+
+    <!-- Card -->
+
+    <div class="card">
+
+        <h2>Supplier Information</h2>
+
+        {% if error %}
+
+        <div class="error-message">
+
+            {{ error }}
+
+        </div>
+
+        {% endif %}
+
+        <form method="POST">
+
+            <div class="input-group">
+
+                <label>Supplier Name *</label>
+
+                <input
+                    type="text"
+                    name="supplier_name"
+                    value="{{ data.supplier_name }}"
+                    required>
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Company Name</label>
+
+                <input
+                    type="text"
+                    name="company_name"
+                    value="{{ data.company_name }}">
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Phone</label>
+
+                <input
+                    type="text"
+                    name="phone"
+                    value="{{ data.phone }}">
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    name="email"
+                    value="{{ data.email }}">
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Address</label>
+
+                <textarea
+                    name="address"
+                    rows="5">{{ data.address }}</textarea>
+
+            </div>
+
+            <div class="button-group">
+
+                <button type="submit" class="save-btn">
+
+                    💾 Update Supplier
+
+                </button>
+
+                <a href="/supplier"
+                   class="back-btn">
+
+                    ← Back
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

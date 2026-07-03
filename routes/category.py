@@ -207,7 +207,7 @@ def update_category(category_id):
         res.execute(sql, value)
 
         con.commit()
-        flash("Category updated successfully.", "success")
+        flash("Supplier updated successfully.", "success")
 
         return redirect(url_for('category.category'))
 
