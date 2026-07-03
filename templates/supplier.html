@@ -1,0 +1,112 @@
+{% extends "home.html" %}
+
+{% block content %}
+
+<div class="page">
+
+    <div class="breadcrumb">
+
+        Dashboard > <span>Supplier</span>
+
+    </div>
+
+    <div class="page-title">
+
+        <h1>🏢 Supplier Management</h1>
+
+        <p>Manage all suppliers in your inventory system.</p>
+
+    </div>
+
+    <div class="page-action">
+
+        <a href="{{ url_for('dashboard.home') }}" class="back-btn">
+
+            ← Back to Dashboard
+
+        </a>
+
+        <a href="{{ url_for('supplier.add_supplier') }}" class="add-btn">
+
+            + Add Supplier
+
+        </a>
+
+    </div>
+
+    <div class="search-box">
+
+        <form action="{{ url_for('supplier.supplier') }}" method="GET">
+
+            <input
+                type="text"
+                name="search"
+                placeholder="Search Supplier">
+
+            <button type="submit">
+
+                Search
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>Supplier Name</th>
+
+                <th>Company</th>
+
+                <th>Phone</th>
+
+                <th>Email</th>
+
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for row in datas %}
+
+            <tr>
+
+                <td>{{ row.supplier_id }}</td>
+
+                <td>{{ row.supplier_name }}</td>
+
+                <td>{{ row.company_name }}</td>
+
+                <td>{{ row.phone }}</td>
+
+                <td>{{ row.email }}</td>
+
+                <td>
+
+                    <a href="#">Edit</a>
+
+                    <a href="#">Delete</a>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

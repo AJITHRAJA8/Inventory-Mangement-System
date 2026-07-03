@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Inventory Management{% endblock %}</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='dashboard.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>Inventory</h2>
+
+            <p>Management System</p>
+
+        </div>
+
+        <ul>
+
+            <li><a href="{{ url_for('dashboard.home') }}">🏠 Dashboard</a></li>
+
+            <li><a href="#">📦 Products</a></li>
+
+            <li><a href="{{ url_for('category.category') }}">📂 Categories</a></li>
+
+            <li><a href="{{ url_for('supplier.supplier') }}">🚚 Suppliers</a></li>
+
+            <li><a href="#">👥 Customers</a></li>
+
+            <li><a href="#">📥 Stock In</a></li>
+
+            <li><a href="#">📤 Stock Out</a></li>
+
+            <li><a href="#">📊 Reports</a></li>
+
+            <li><a href="#">⚙ Settings</a></li>
+
+            <li><a href="{{ url_for('auth.logout') }}">🚪 Logout</a></li>
+
+        </ul>
+
+    </aside>
+
+    <!-- Main -->
+
+    <div class="main-content">
+
+        <header class="navbar">
+
+            <h2>{% block page_title %}Dashboard{% endblock %}</h2>
+
+            <div class="user">
+
+                Welcome {{ session['user'] }}
+
+            </div>
+
+        </header>
+
+        {% block content %}
+
+        {% endblock %}
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
