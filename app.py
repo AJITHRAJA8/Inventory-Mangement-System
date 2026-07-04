@@ -4,6 +4,7 @@ from routes.dashboard import dashboard_bp
 from routes.category import category_bp
 from routes.supplier import supplier_bp
 from routes.product import product_bp
+from routes.stock_in import stock_in_bp
 
 app = Flask(__name__)
 
@@ -15,6 +16,7 @@ app.register_blueprint(dashboard_bp)
 app.register_blueprint(category_bp)
 app.register_blueprint(supplier_bp)
 app.register_blueprint(product_bp)
+app.register_blueprint(stock_in_bp)
 
 if __name__ == "__main__":
 
