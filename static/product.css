@@ -1,0 +1,365 @@
+body{
+
+    background:#f0fdf4;
+
+    color:#1e293b;
+
+}
+
+.page{
+
+    width:92%;
+
+    max-width:1350px;
+
+    margin:35px auto;
+
+}
+
+.breadcrumb{
+
+    font-size:14px;
+
+    color:#64748b;
+
+    margin-bottom:18px;
+
+}
+
+.breadcrumb span{
+
+    color:#16a34a;
+
+    font-weight:bold;
+
+}
+
+.page-title{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
+}
+
+.page-title h1{
+
+    font-size:38px;
+
+    color:#166534;
+
+    margin-bottom:8px;
+
+}
+
+.page-title p{
+
+    color:#64748b;
+
+}
+
+.add-btn{
+
+    background:#16a34a;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:14px 24px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+}
+
+.add-btn:hover{
+
+    background:#15803d;
+
+}
+
+.back-btn{
+
+    background:#64748b;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:14px 24px;
+
+    border-radius:10px;
+
+}
+
+.back-btn:hover{
+
+    background:#475569;
+
+}
+
+.search-card{
+
+    background:white;
+
+    border-radius:15px;
+
+    padding:22px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    margin-bottom:30px;
+
+}
+
+.search-card form{
+
+    display:flex;
+
+    gap:15px;
+
+}
+
+.search-card input{
+
+    flex:1;
+
+    padding:15px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:10px;
+
+}
+
+.search-card input:focus{
+
+    outline:none;
+
+    border-color:#16a34a;
+
+}
+
+.search-card button{
+
+    background:#16a34a;
+
+    color:white;
+
+    border:none;
+
+    padding:15px 30px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+}
+
+.search-card button:hover{
+
+    background:#15803d;
+
+}
+
+.table-card{
+
+    background:white;
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+table th{
+
+    background:#dcfce7;
+
+    color:#14532d;
+
+    padding:18px;
+
+    text-align:left;
+
+}
+
+table td{
+
+    padding:18px;
+
+    border-bottom:1px solid #e5e7eb;
+
+}
+
+table tbody tr:hover{
+
+    background:#f0fdf4;
+
+}
+
+.product-img{
+
+    width:65px;
+
+    height:65px;
+
+    object-fit:cover;
+
+    border-radius:10px;
+
+    border:2px solid #d1fae5;
+
+}
+
+.status{
+
+    padding:8px 15px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+}
+
+.available{
+
+    background:#dcfce7;
+
+    color:#166534;
+
+}
+
+.low{
+
+    background:#fef3c7;
+
+    color:#92400e;
+
+}
+
+.out{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+}
+
+.action-buttons{
+
+    display:flex;
+
+    gap:8px;
+
+}
+
+.edit-btn{
+
+    background:#3b82f6;
+
+    color:white;
+
+    padding:10px 15px;
+
+    text-decoration:none;
+
+    border-radius:8px;
+
+}
+
+.edit-btn:hover{
+
+    background:#2563eb;
+
+}
+
+.delete-btn{
+
+    background:#ef4444;
+
+    color:white;
+
+    padding:10px 15px;
+
+    text-decoration:none;
+
+    border-radius:8px;
+
+}
+
+.delete-btn:hover{
+
+    background:#dc2626;
+
+}
+
+.pagination{
+
+    margin-top:30px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.page-number{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+.page-number a{
+
+    background:white;
+
+    color:#334155;
+
+    padding:10px 16px;
+
+    border-radius:8px;
+
+    text-decoration:none;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+}
+
+.page-number a:hover{
+
+    background:#16a34a;
+
+    color:white;
+
+}
+
+.page-number .active{
+
+    background:#16a34a;
+
+    color:white;
+
+}

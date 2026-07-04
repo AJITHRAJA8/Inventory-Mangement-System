@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Product Management</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='product.css') }}">
+
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- Breadcrumb -->
+
+    <div class="breadcrumb">
+
+        Dashboard >
+
+        Inventory >
+
+        <span>Products</span>
+
+    </div>
+
+    <!-- Flash Message -->
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% if messages %}
+
+            {% for category, message in messages %}
+
+                <div class="flash-message {{ category }}">
+
+                    {{ message }}
+
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
+
+    <!-- Title -->
+
+    <div class="page-title">
+
+        <div>
+
+            <h1>📦 Product Management</h1>
+
+            <p>
+
+                Manage all products available in your inventory.
+
+            </p>
+
+        </div>
+
+        <div class="page-action">
+
+            <a href="/home"
+               class="back-btn">
+
+                🏠 Dashboard
+
+            </a>
+
+            <a href="/add_product"
+               class="add-btn">
+
+                ➕ Add Product
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Search -->
+
+    <div class="search-card">
+
+        <form action="/product"
+              method="GET">
+
+            <input
+                type="text"
+                name="search"
+                placeholder="🔍 Search product..."
+                value="{{ search if search else '' }}">
+
+            <button type="submit">
+
+                Search
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- Table -->
+
+    <div class="table-card">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Image</th>
+
+                    <th>Product</th>
+
+                    <th>Category</th>
+
+                    <th>Supplier</th>
+
+                    <th>Price</th>
+
+                    <th>Stock</th>
+
+                    <th>Status</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+           <tbody>
+
+                {% if datas %}
+
+                    {% for row in datas %}
+
+                    <tr>
+
+                        <td>{{ row.product_id }}</td>
+
+                        <td>
+
+                            {% if row.image %}
+
+                                <img src="{{ url_for('static',
+                                filename='images/' + row.image) }}"
+                                class="product-img">
+
+                            {% else %}
+
+                                <img src="{{ url_for('static',
+                                filename='images/no-image.png') }}"
+                                class="product-img">
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            <strong>{{ row.product_name }}</strong>
+
+                        </td>
+
+                        <td>
+
+                            {{ row.category_name }}
+
+                        </td>
+
+                        <td>
+
+                            {{ row.supplier_name }}
+
+                        </td>
+
+                        <td>
+
+                            ₹ {{ "%.2f"|format(row.price) }}
+
+                        </td>
+
+                        <td>
+
+                            {{ row.stock }}
+
+                        </td>
+
+                        <td>
+
+                            {% if row.stock == 0 %}
+
+                                <span class="status out">
+
+                                    Out of Stock
+
+                                </span>
+
+                            {% elif row.stock <= 150 %}
+
+                                <span class="status low">
+
+                                    Low Stock
+
+                                </span>
+
+                            {% else %}
+
+                                <span class="status available">
+
+                                    In Stock
+
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            <div class="action-buttons">
+
+                                <a href="/update_product/{{ row.product_id }}"
+                                class="edit-btn">
+
+                                    ✏ Edit
+
+                                </a>
+
+                                <a href="/delete_product/{{ row.product_id }}"
+                                class="delete-btn">
+
+                                    🗑 Delete
+
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                {% else %}
+
+                <tr>
+
+                    <td colspan="9" class="empty-data">
+
+                        <h3>📦 No Products Found</h3>
+
+                        <p>
+
+                            Click <strong>Add Product</strong> to create your first product.
+
+                        </p>
+
+                    </td>
+
+                </tr>
+
+                {% endif %}
+
+                </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- Pagination -->
+
+    <div class="pagination">
+
+        <div class="page-info">
+
+            Showing Page {{ current_page }} of {{ total_pages }}
+
+        </div>
+
+        <div class="page-number">
+
+            {% if current_page > 1 %}
+
+            <a href="{{ url_for('product.product',
+                                page=current_page-1,
+                                search=search) }}">
+
+                Previous
+
+            </a>
+
+            {% endif %}
+
+            {% for i in range(1, total_pages+1) %}
+
+            <a href="{{ url_for('product.product',
+                                page=i,
+                                search=search) }}"
+
+               {% if i == current_page %}
+
+                    class="active"
+
+               {% endif %}>
+
+                {{ i }}
+
+            </a>
+
+            {% endfor %}
+
+            {% if current_page < total_pages %}
+
+            <a href="{{ url_for('product.product',
+                                page=current_page+1,
+                                search=search) }}">
+
+                Next
+
+            </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
