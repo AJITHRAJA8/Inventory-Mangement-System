@@ -12,4 +12,15 @@ def stock_in():
     if 'user' not in session:
         return redirect (url_for('auth.login'))
     
-    return render_template("stock_in.html")
+    #Page
+    
+    
+    res = con.cursor()
+
+    sql = 'select * from stock_in'
+
+    res.execute(sql)
+
+    result = fetch_all_dict(res)
+    
+    return render_template("stock_in.html",datas=result)

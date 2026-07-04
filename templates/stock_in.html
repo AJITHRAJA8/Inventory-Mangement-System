@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Stock_In</title>
+        
+        <link rel="stylesheet" href="{{url_for('static',filename='category.css')}}">
+    </head>
+
+    <body>
+        <h1>Stock_in</h1>
+        <form action="/stock_in" method="get">
+            <table>
+                <tr>
+                    <th>stock_id</th>
+                    <th>product_id</th>
+                    <th>quantity</th>
+                    <th>stock_date</th>
+                    <th>supplier_id</th>
+                    <th>purchase_price</th>
+                    <th>remarks</th>
+                </tr>
+                {% for row in datas %}
+                <tr>
+                    <td>{{row.sock_id}}</td>
+                    <td>{{row.product_id}}</td>
+                    <td>{{row.quantity}}</td>
+                    <td>{{row.stock_date}}</td>
+                    <td>{{row.supplier_id}}</td>
+                    <td>{{row.purchase_price}}</td>
+                    <td>{{row.remarks}}</td>
+
+                </tr>
+                {% endfor %}
+            </table>
+
+        </form>
+    </body>
+</html>
