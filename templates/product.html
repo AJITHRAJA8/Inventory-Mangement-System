@@ -156,20 +156,20 @@
 
                             {% if row.image %}
 
-                                <img src="{{ url_for('static',
-                                filename='images/' + row.image) }}"
-                                class="product-img">
+                                <img
+                                    src="{{ url_for('static', filename='images/' + row.image) }}"
+                                    class="product-img"
+                                    onerror="this.src='{{ url_for('static', filename='images/no-image.jpg') }}'">
 
                             {% else %}
 
-                                <img src="{{ url_for('static',
-                                filename='images/no-image.png') }}"
-                                class="product-img">
+                                <img
+                                    src="{{ url_for('static', filename='images/no-image.jpg') }}"
+                                    class="product-img">
 
                             {% endif %}
 
                         </td>
-
                         <td>
 
                             <strong>{{ row.product_name }}</strong>
