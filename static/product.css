@@ -1,6 +1,22 @@
+/* ===================================
+   Global
+=================================== */
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+    font-family:Arial, Helvetica, sans-serif;
+
+}
+
 body{
 
-    background:#f0fdf4;
+    background:#eefbf3;
 
     color:#1e293b;
 
@@ -15,6 +31,10 @@ body{
     margin:35px auto;
 
 }
+
+/* ===================================
+   Breadcrumb
+=================================== */
 
 .breadcrumb{
 
@@ -33,6 +53,10 @@ body{
     font-weight:bold;
 
 }
+
+/* ===================================
+   Page Title
+=================================== */
 
 .page-title{
 
@@ -62,6 +86,18 @@ body{
 
 }
 
+/* ===================================
+   Buttons
+=================================== */
+
+.page-action{
+
+    display:flex;
+
+    gap:15px;
+
+}
+
 .add-btn{
 
     background:#16a34a;
@@ -75,6 +111,8 @@ body{
     border-radius:10px;
 
     font-weight:bold;
+
+    transition:.3s;
 
 }
 
@@ -96,6 +134,10 @@ body{
 
     border-radius:10px;
 
+    font-weight:bold;
+
+    transition:.3s;
+
 }
 
 .back-btn:hover{
@@ -104,17 +146,21 @@ body{
 
 }
 
+/* ===================================
+   Search
+=================================== */
+
 .search-card{
 
     background:white;
 
-    border-radius:15px;
-
     padding:22px;
 
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    border-radius:15px;
 
-    margin-bottom:30px;
+    margin-bottom:25px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
 
 }
 
@@ -136,6 +182,8 @@ body{
 
     border-radius:10px;
 
+    font-size:15px;
+
 }
 
 .search-card input:focus{
@@ -143,6 +191,8 @@ body{
     outline:none;
 
     border-color:#16a34a;
+
+    box-shadow:0 0 0 4px rgba(22,163,74,.15);
 
 }
 
@@ -154,11 +204,15 @@ body{
 
     border:none;
 
-    padding:15px 30px;
+    padding:15px 28px;
 
     border-radius:10px;
 
     cursor:pointer;
+
+    font-weight:bold;
+
+    transition:.3s;
 
 }
 
@@ -167,6 +221,10 @@ body{
     background:#15803d;
 
 }
+
+/* ===================================
+   Table
+=================================== */
 
 .table-card{
 
@@ -198,6 +256,8 @@ table th{
 
     text-align:left;
 
+    font-size:15px;
+
 }
 
 table td{
@@ -214,6 +274,10 @@ table tbody tr:hover{
 
 }
 
+/* ===================================
+   Product Image
+=================================== */
+
 .product-img{
 
     width:65px;
@@ -224,11 +288,627 @@ table tbody tr:hover{
 
     border-radius:10px;
 
-    border:2px solid #d1fae5;
+    border:2px solid #bbf7d0;
 
 }
 
+/* ===================================
+   Action Buttons
+=================================== */
+
+.action-buttons{
+
+    display:flex;
+
+    gap:8px;
+
+    justify-content:center;
+
+    align-items:center;
+
+    white-space:nowrap;
+
+}
+
+.edit-btn{
+
+    background:#3b82f6;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:10px 15px;
+
+    border-radius:8px;
+
+    transition:.3s;
+
+}
+
+.edit-btn:hover{
+
+    background:#2563eb;
+
+}
+
+.delete-btn{
+
+    background:#ef4444;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:10px 15px;
+
+    border-radius:8px;
+
+    transition:.3s;
+
+}
+
+.delete-btn:hover{
+
+    background:#dc2626;
+
+}
+
+/* ===================================
+   Form Card
+=================================== */
+
+.card{
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:15px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.card h2{
+
+    font-size:26px;
+
+    color:#166534;
+
+    margin-bottom:30px;
+
+    padding-bottom:15px;
+
+    border-bottom:2px solid #dcfce7;
+
+}
+
+/* ===================================
+   Form
+=================================== */
+
+.input-group{
+
+    margin-bottom:25px;
+
+}
+
+.input-group label{
+
+    display:block;
+
+    margin-bottom:10px;
+
+    font-weight:bold;
+
+    color:#374151;
+
+}
+
+.input-group label span{
+
+    color:#dc2626;
+
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea{
+
+    width:100%;
+
+    padding:14px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+    transition:.3s;
+
+    background:white;
+
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus{
+
+    outline:none;
+
+    border-color:#16a34a;
+
+    box-shadow:0 0 0 4px rgba(22,163,74,.15);
+
+}
+
+/* ===================================
+   Textarea
+=================================== */
+
+textarea{
+
+    resize:vertical;
+
+    min-height:120px;
+
+}
+
+/* ===================================
+   Select Box
+=================================== */
+
+select{
+
+    cursor:pointer;
+
+}
+
+/* ===================================
+   File Upload
+=================================== */
+
+input[type="file"]{
+
+    padding:12px;
+
+    background:#f8fafc;
+
+    cursor:pointer;
+
+}
+
+/* ===================================
+   Current Product Image
+=================================== */
+
+.preview-image{
+
+    width:180px;
+
+    height:180px;
+
+    object-fit:cover;
+
+    border-radius:12px;
+
+    border:4px solid #16a34a;
+
+    background:white;
+
+    padding:5px;
+
+    box-shadow:0 6px 15px rgba(0,0,0,.15);
+
+}
+
+/* ===================================
+   Save / Back Buttons
+=================================== */
+
+.button-group{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:35px;
+
+}
+
+.save-btn{
+
+    background:#16a34a;
+
+    color:white;
+
+    border:none;
+
+    padding:14px 30px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.save-btn:hover{
+
+    background:#15803d;
+
+}
+
+/* ===================================
+   Error Message
+=================================== */
+
+.error-message{
+
+    background:#fee2e2;
+
+    color:#b91c1c;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    margin-bottom:25px;
+
+    border-left:5px solid #ef4444;
+
+    font-weight:bold;
+
+}
+
+/* ===================================
+   Flash Message
+=================================== */
+
+.flash-message{
+
+    padding:15px;
+
+    margin-bottom:20px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+}
+
+.flash-message.success{
+
+    background:#dcfce7;
+
+    color:#166534;
+
+    border-left:5px solid #16a34a;
+
+}
+
+.flash-message.error{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+    border-left:5px solid #ef4444;
+
+}
+/* ===================================
+   Delete Page
+=================================== */
+
+.delete-message{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+}
+
+.delete-message h3{
+
+    color:#dc2626;
+
+    font-size:30px;
+
+    margin-bottom:10px;
+
+}
+
+.delete-message p{
+
+    color:#64748b;
+
+    font-size:16px;
+
+}
+
+/* ===================================
+   Image Preview
+=================================== */
+
+.image-preview{
+
+    display:flex;
+
+    justify-content:center;
+
+    margin:25px 0;
+
+}
+
+/* ===================================
+   Product Information
+=================================== */
+
+.delete-info{
+
+    background:#f8fafc;
+
+    border:1px solid #dbeafe;
+
+    border-radius:12px;
+
+    padding:25px;
+
+    margin-top:20px;
+
+}
+
+.delete-info p{
+
+    margin-bottom:15px;
+
+    color:#374151;
+
+    font-size:15px;
+
+    line-height:1.8;
+
+}
+
+.delete-info strong{
+
+    color:#166534;
+
+    display:inline-block;
+
+    width:140px;
+
+}
+
+/* ===================================
+   Warning
+=================================== */
+
+.warning{
+
+    margin-top:30px;
+
+    background:#fef2f2;
+
+    color:#b91c1c;
+
+    border-left:5px solid #ef4444;
+
+    padding:18px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+}
+
+/* ===================================
+   Empty Data
+=================================== */
+
+.empty-data{
+
+    text-align:center;
+
+    padding:70px 20px;
+
+}
+
+.empty-data h3{
+
+    color:#166534;
+
+    margin-bottom:10px;
+
+    font-size:28px;
+
+}
+
+.empty-data p{
+
+    color:#64748b;
+
+    font-size:15px;
+
+}
+
+/* ===================================
+   Pagination
+=================================== */
+
+.pagination{
+
+    margin-top:30px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.page-info{
+
+    color:#64748b;
+
+    font-size:15px;
+
+}
+
+.page-number{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+.page-number a{
+
+    text-decoration:none;
+
+    background:white;
+
+    color:#334155;
+
+    padding:10px 16px;
+
+    border-radius:8px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.page-number a:hover{
+
+    background:#16a34a;
+
+    color:white;
+
+}
+
+.page-number .active{
+
+    background:#16a34a;
+
+    color:white;
+
+}
+
+/* ===================================
+   Responsive
+=================================== */
+
+@media(max-width:900px){
+
+.page{
+
+    width:95%;
+
+}
+
+.page-title{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:20px;
+
+}
+
+.page-action{
+
+    width:100%;
+
+    flex-direction:column;
+
+}
+
+.search-card form{
+
+    flex-direction:column;
+
+}
+
+.button-group{
+
+    flex-direction:column;
+
+}
+
+.action-buttons{
+
+    flex-direction:column;
+
+}
+
+.preview-image{
+
+    width:140px;
+
+    height:140px;
+
+}
+
+.table-card{
+
+    overflow-x:auto;
+
+}
+
+table{
+
+    min-width:900px;
+
+}
+
+.delete-info strong{
+
+    width:120px;
+
+}
+
+}
+
+/* ===================================
+   Nice Scrollbar
+=================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+    height:10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#16a34a;
+
+    border-radius:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#dcfce7;
+
+}
 .status{
+
+    display:inline-block;
 
     padding:8px 15px;
 
@@ -261,105 +941,5 @@ table tbody tr:hover{
     background:#fee2e2;
 
     color:#991b1b;
-
-}
-
-.action-buttons{
-
-    display:flex;
-
-    gap:8px;
-
-}
-
-.edit-btn{
-
-    background:#3b82f6;
-
-    color:white;
-
-    padding:10px 15px;
-
-    text-decoration:none;
-
-    border-radius:8px;
-
-}
-
-.edit-btn:hover{
-
-    background:#2563eb;
-
-}
-
-.delete-btn{
-
-    background:#ef4444;
-
-    color:white;
-
-    padding:10px 15px;
-
-    text-decoration:none;
-
-    border-radius:8px;
-
-}
-
-.delete-btn:hover{
-
-    background:#dc2626;
-
-}
-
-.pagination{
-
-    margin-top:30px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-}
-
-.page-number{
-
-    display:flex;
-
-    gap:10px;
-
-}
-
-.page-number a{
-
-    background:white;
-
-    color:#334155;
-
-    padding:10px 16px;
-
-    border-radius:8px;
-
-    text-decoration:none;
-
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
-
-}
-
-.page-number a:hover{
-
-    background:#16a34a;
-
-    color:white;
-
-}
-
-.page-number .active{
-
-    background:#16a34a;
-
-    color:white;
 
 }

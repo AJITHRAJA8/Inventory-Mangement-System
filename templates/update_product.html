@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Update Product</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='product.css') }}">
+
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- Breadcrumb -->
+
+    <div class="breadcrumb">
+
+        Dashboard >
+
+        Inventory >
+
+        Products >
+
+        <span>Update Product</span>
+
+    </div>
+
+    <!-- Title -->
+
+    <div class="page-title">
+
+        <div>
+
+            <h1>✏️ Update Product</h1>
+
+            <p>Update the selected product information.</p>
+
+        </div>
+
+    </div>
+
+    <!-- Card -->
+
+    <div class="card">
+
+        <h2>Product Information</h2>
+
+        {% if error %}
+
+        <div class="error-message">
+
+            {{ error }}
+
+        </div>
+
+        {% endif %}
+
+        <form method="POST"
+              enctype="multipart/form-data">
+
+            <!-- Product Name -->
+
+            <div class="input-group">
+
+                <label>Product Name *</label>
+
+                <input
+                    type="text"
+                    name="product_name"
+                    value="{{ data.product_name }}"
+                    required>
+
+            </div>
+
+            <!-- Category -->
+
+            <div class="input-group">
+
+                <label>Category *</label>
+
+                <select
+                    name="category_id"
+                    required>
+
+                    {% for row in categories %}
+
+                    <option
+                        value="{{ row.category_id }}"
+                        {% if row.category_id == data.category_id %}
+                            selected
+                        {% endif %}>
+
+                        {{ row.category_name }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <!-- Supplier -->
+
+            <div class="input-group">
+
+                <label>Supplier *</label>
+
+                <select
+                    name="supplier_id"
+                    required>
+
+                    {% for row in suppliers %}
+
+                    <option
+                        value="{{ row.supplier_id }}"
+                        {% if row.supplier_id == data.supplier_id %}
+                            selected
+                        {% endif %}>
+
+                        {{ row.supplier_name }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <!-- Price -->
+
+            <div class="input-group">
+
+                <label>Price *</label>
+
+                <input
+                    type="number"
+                    name="price"
+                    step="0.01"
+                    min="0"
+                    value="{{ data.price }}"
+                    required>
+
+            </div>
+
+            <!-- Stock -->
+
+            <div class="input-group">
+
+                <label>Stock *</label>
+
+                <input
+                    type="number"
+                    name="stock"
+                    min="0"
+                    value="{{ data.stock }}"
+                    required>
+
+            </div>
+
+            <!-- Current Image -->
+
+            <div class="input-group">
+
+                <label>Current Image</label>
+
+                <br><br>
+
+                <img src="{{ url_for('static',
+                        filename='images/' + data.image) }}"
+                     class="preview-image">
+
+            </div>
+
+            <!-- New Image -->
+
+            <div class="input-group">
+
+                <label>Change Product Image</label>
+
+                <input
+                    type="file"
+                    name="image"
+                    accept=".jpg,.jpeg,.png,.webp">
+
+            </div>
+
+            <!-- Description -->
+
+            <div class="input-group">
+
+                <label>Description</label>
+
+                <textarea
+                    name="description"
+                    rows="5">{{ data.description }}</textarea>
+
+            </div>
+
+            <!-- Buttons -->
+
+            <div class="button-group">
+
+                <button
+                    type="submit"
+                    class="save-btn">
+
+                    💾 Update Product
+
+                </button>
+
+                <a href="/product"
+                   class="back-btn">
+
+                    ← Back
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
