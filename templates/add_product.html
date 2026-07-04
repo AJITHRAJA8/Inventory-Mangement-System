@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Product</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='product.css') }}">
+
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- Breadcrumb -->
+
+    <div class="breadcrumb">
+
+        Dashboard >
+
+        Inventory >
+
+        Products >
+
+        <span>Add Product</span>
+
+    </div>
+
+    <!-- Page Title -->
+
+    <div class="page-title">
+
+        <div>
+
+            <h1>📦 Add Product</h1>
+
+            <p>
+
+                Add a new product to your inventory.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Card -->
+
+    <div class="card">
+
+        <h2>Product Information</h2>
+
+        {% if error %}
+
+        <div class="error-message">
+
+            {{ error }}
+
+        </div>
+
+        {% endif %}
+
+        <form method="POST"
+              enctype="multipart/form-data">
+
+            <!-- Product Name -->
+
+            <div class="input-group">
+
+                <label>Product Name <span>*</span></label>
+
+                <input
+                    type="text"
+                    name="product_name"
+                    value="{{ product_name if product_name else '' }}"
+                    required>
+
+            </div>
+
+            <!-- Category -->
+
+            <div class="input-group">
+
+                <label>Category <span>*</span></label>
+
+                <select
+                    name="category_id"
+                    required>
+
+                    <option value="">
+
+                        Select Category
+
+                    </option>
+
+                    {% for row in categories %}
+
+                    <option
+                        value="{{ row.category_id }}">
+
+                        {{ row.category_name }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <!-- Supplier -->
+
+            <div class="input-group">
+
+                <label>Supplier <span>*</span></label>
+
+                <select
+                    name="supplier_id"
+                    required>
+
+                    <option value="">
+
+                        Select Supplier
+
+                    </option>
+
+                    {% for row in suppliers %}
+
+                    <option
+                        value="{{ row.supplier_id }}">
+
+                        {{ row.supplier_name }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <!-- Price -->
+
+            <div class="input-group">
+
+                <label>Price (₹) <span>*</span></label>
+
+                <input
+                    type="number"
+                    name="price"
+                    min="0"
+                    step="0.01"
+                    required>
+
+            </div>
+
+            <!-- Stock -->
+
+            <div class="input-group">
+
+                <label>Stock Quantity <span>*</span></label>
+
+                <input
+                    type="number"
+                    name="stock"
+                    min="0"
+                    required>
+
+            </div>
+
+            <!-- Product Image -->
+
+            <div class="input-group">
+
+                <label>Product Image</label>
+
+                <input
+                    type="file"
+                    name="image"
+                    accept=".jpg,.jpeg,.png,.webp">
+
+            </div>
+
+            <!-- Description -->
+
+            <div class="input-group">
+
+                <label>Description</label>
+
+                <textarea
+                    name="description"
+                    rows="5"></textarea>
+
+            </div>
+
+            <!-- Buttons -->
+
+            <div class="button-group">
+
+                <button
+                    type="submit"
+                    class="save-btn">
+
+                    💾 Save Product
+
+                </button>
+
+                <a href="/product"
+                   class="back-btn">
+
+                    ← Back
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
