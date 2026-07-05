@@ -1,212 +1,171 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "layout.html" %}
 
-<head>
+{% block title %}
+Product Report
+{% endblock %}
 
-    <meta charset="UTF-8">
+{% block page_title %}
+Product Report
+{% endblock %}
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+{% block content %}
 
-    <title>Product Report</title>
+<!-- Search -->
 
-    <link rel="stylesheet"
-          href="{{ url_for('static',
-          filename='reports.css') }}">
+<div class="search-card">
 
-</head>
+    <form method="GET">
 
-<body>
+        <input
+            type="text"
+            name="search"
+            placeholder="Search Product..."
+            value="{{ search if search else '' }}">
 
-<div class="page">
+        <button type="submit">
 
-    <!-- Breadcrumb -->
+            Search
 
-    <div class="breadcrumb">
+        </button>
 
-        Dashboard >
+    </form>
 
-        Reports >
+</div>
 
-        <span>Product Report</span>
+<!-- Report Table -->
 
-    </div>
+<div class="table-box">
 
-    <!-- Page Title -->
+    <div class="table-header">
 
-    <div class="page-title">
+        <h3>
 
-        <div>
+            📦 Product Report
 
-            <h1>📦 Product Report</h1>
-
-            <p>
-
-                View all available products.
-
-            </p>
-
-        </div>
-
-        <div class="page-action">
-
-            <a href="/reports"
-               class="back-btn">
-
-                ← Back
-
-            </a>
-
-            <a href="/export_product_report"
-               class="add-btn">
-
-                📥 Export CSV
-
-            </a>
-
-        </div>
+        </h3>
 
     </div>
 
-    <!-- Table -->
+    <table>
 
-    <div class="table-card">
+        <thead>
 
-        <table>
+            <tr>
 
-            <thead>
+                <th>ID</th>
 
-                <tr>
+                <th>Product</th>
 
-                    <th>ID</th>
+                <th>Category</th>
 
-                    <th>Product</th>
+                <th>Supplier</th>
 
-                    <th>Category</th>
+                <th>Price</th>
 
-                    <th>Supplier</th>
+                <th>Stock</th>
 
-                    <th>Price</th>
+                <th>Status</th>
 
-                    <th>Stock</th>
+            </tr>
 
-                    <th>Status</th>
+        </thead>
 
-                </tr>
+        <tbody>
 
-            </thead>
+            {% if datas %}
 
-            <tbody>
-
-                {% if datas %}
-
-                    {% for row in datas %}
-
-                    <tr>
-
-                        <td>
-
-                            {{ row.product_id }}
-
-                        </td>
-
-                        <td>
-
-                            {{ row.product_name }}
-
-                        </td>
-
-                        <td>
-
-                            {{ row.category_name }}
-
-                        </td>
-
-                        <td>
-
-                            {{ row.supplier_name }}
-
-                        </td>
-
-                        <td>
-
-                            ₹ {{ row.price }}
-
-                        </td>
-
-                        <td>
-
-                            {{ row.stock }}
-
-                        </td>
-
-                        <td>
-
-                            {% if row.stock == 0 %}
-
-                                <span class="status out">
-
-                                    Out of Stock
-
-                                </span>
-
-                            {% elif row.stock <= 10 %}
-
-                                <span class="status low">
-
-                                    Low Stock
-
-                                </span>
-
-                            {% else %}
-
-                                <span class="status available">
-
-                                    In Stock
-
-                                </span>
-
-                            {% endif %}
-
-                        </td>
-
-                    </tr>
-
-                    {% endfor %}
-
-                {% else %}
+                {% for row in datas %}
 
                 <tr>
 
-                    <td colspan="7"
-                        class="empty-data">
+                    <td>
 
-                        <h3>
+                        {{ row.product_id }}
 
-                            No Products Found
+                    </td>
 
-                        </h3>
+                    <td>
 
-                        <p>
+                        {{ row.product_name }}
 
-                            Product report is empty.
+                    </td>
 
-                        </p>
+                    <td>
+
+                        {{ row.category_name }}
+
+                    </td>
+
+                    <td>
+
+                        {{ row.supplier_name }}
+
+                    </td>
+
+                    <td>
+
+                        ₹ {{ "%.2f"|format(row.price) }}
+
+                    </td>
+
+                    <td>
+
+                        {{ row.stock }}
+
+                    </td>
+
+                    <td>
+
+                        {% if row.stock == 0 %}
+
+                            <span class="status out">
+
+                                Out of Stock
+
+                            </span>
+
+                        {% elif row.stock <= 10 %}
+
+                            <span class="status low">
+
+                                Low Stock
+
+                            </span>
+
+                        {% else %}
+
+                            <span class="status available">
+
+                                In Stock
+
+                            </span>
+
+                        {% endif %}
 
                     </td>
 
                 </tr>
 
-                {% endif %}
+                {% endfor %}
 
-            </tbody>
+            {% else %}
 
-        </table>
+                <tr>
 
-    </div>
+                    <td colspan="7" class="empty-data">
+
+                        No Products Found
+
+                    </td>
+
+                </tr>
+
+            {% endif %}
+
+        </tbody>
+
+    </table>
 
 </div>
 
-</body>
-
-</html>
+{% endblock %}

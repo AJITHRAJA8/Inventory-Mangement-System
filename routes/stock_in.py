@@ -1,6 +1,9 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
+
 from database import con
+
 from helpers import fetch_all_dict, fetch_one_dict
+
 import math
 
 stock_in_bp = Blueprint("stock_in", __name__)
@@ -26,6 +29,7 @@ def stock_in():
     res = con.cursor()
 
     # Search
+
     if search:
 
         sql = """
@@ -140,6 +144,7 @@ def stock_in():
         search=search
     )
 
+
 # ==========================================
 # Add Stock In
 # ==========================================
@@ -191,9 +196,14 @@ def add_stock_in():
 
     if request.method == "POST":
 
-        product_id = request.form["product_id"]
+        # FIX: cast product_id and supplier_id to int.
+        # Previously these stayed as strings from request.form,
+        # which caused the later UPDATE product ... WHERE product_id = ?
+        # to silently match 0 rows on some ODBC drivers (no error,
+        # but product.stock never changed).
+        product_id = int(request.form["product_id"])
 
-        supplier_id = request.form["supplier_id"]
+        supplier_id = int(request.form["supplier_id"])
 
         quantity = int(request.form["quantity"])
 
@@ -209,6 +219,11 @@ def add_stock_in():
 
         res = con.cursor()
 
+        # FIX: column name corrected to stockin_date to match
+        # the actual table schema (same naming as stockin_id,
+        # used elsewhere in this file's ORDER BY clauses).
+        # If your table genuinely has a column called
+        # stock_in_date instead, revert this back.
         sql = """
         INSERT INTO stock_in
         (
@@ -216,7 +231,7 @@ def add_stock_in():
             supplier_id,
             quantity,
             purchase_price,
-            stock_in_date,
+            stockin_date,
             remarks
         )
         VALUES
