@@ -7,6 +7,7 @@ from routes.product import product_bp
 from routes.stock_in import stock_in_bp
 from routes.stock_out import stock_out_bp
 from routes.customer import customer_bp
+from routes.reports import reports_bp
 
 app = Flask(__name__)
 
@@ -21,6 +22,7 @@ app.register_blueprint(product_bp)
 app.register_blueprint(stock_in_bp)
 app.register_blueprint(stock_out_bp)
 app.register_blueprint(customer_bp)
+app.register_blueprint(reports_bp)
 
 if __name__ == "__main__":
 

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Stock Out</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='stockout.css') }}">
+
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- Breadcrumb -->
+
+    <div class="breadcrumb">
+
+        Dashboard >
+
+        Inventory >
+
+        Stock Out >
+
+        <span>Add Stock Out</span>
+
+    </div>
+
+    <!-- Title -->
+
+    <div class="page-title">
+
+        <div>
+
+            <h1>📤 Add Stock Out</h1>
+
+            <p>
+
+                Record product sales and reduce inventory stock.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Card -->
+
+    <div class="card">
+
+        <h2>Stock Out Information</h2>
+
+        {% if error %}
+
+        <div class="error-message">
+
+            {{ error }}
+
+        </div>
+
+        {% endif %}
+
+        <form method="POST">
+
+            <!-- Customer -->
+
+            <div class="input-group">
+
+                <label>
+
+                    Customer <span>*</span>
+
+                </label>
+
+                <select
+                    name="customer_id"
+                    required>
+
+                    <option value="">
+
+                        -- Select Customer --
+
+                    </option>
+
+                    {% for customer in customers %}
+
+                    <option
+                        value="{{ customer.customer_id }}"
+
+                        {% if data and data.customer_id|string == customer.customer_id|string %}
+
+                            selected
+
+                        {% endif %}>
+
+                        {{ customer.customer_name }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <!-- Product -->
+
+            <div class="input-group">
+
+                <label>
+
+                    Product <span>*</span>
+
+                </label>
+
+                <select
+                    name="product_id"
+                    required>
+
+                    <option value="">
+
+                        -- Select Product --
+
+                    </option>
+
+                    {% for product in products %}
+
+                    <option
+                        value="{{ product.product_id }}"
+
+                        {% if data and data.product_id|string == product.product_id|string %}
+
+                            selected
+
+                        {% endif %}>
+
+                        {{ product.product_name }}
+
+                        (Stock : {{ product.stock }})
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <!-- Quantity -->
+
+            <div class="input-group">
+
+                <label>
+
+                    Quantity <span>*</span>
+
+                </label>
+
+                <input
+                    type="number"
+                    name="quantity"
+                    min="1"
+                    value="{{ data.quantity if data else '' }}"
+                    required>
+
+            </div>
+
+            <!-- Date -->
+
+            <div class="input-group">
+
+                <label>
+
+                    Stock Out Date <span>*</span>
+
+                </label>
+
+                <input
+                    type="date"
+                    name="stockout_date"
+                    value="{{ data.stockout_date if data else '' }}"
+                    required>
+
+            </div>
+
+            <!-- Remarks -->
+
+            <div class="input-group">
+
+                <label>
+
+                    Remarks
+
+                </label>
+
+                <textarea
+                    name="remarks"
+                    rows="4"
+                    placeholder="Enter remarks...">{{ data.remarks if data else '' }}</textarea>
+
+            </div>
+
+            <!-- Buttons -->
+
+            <div class="button-group">
+
+                <button
+                    type="submit"
+                    class="save-btn">
+
+                    💾 Save Stock Out
+
+                </button>
+
+                <a href="/stock_out"
+                   class="back-btn">
+
+                    ← Back
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

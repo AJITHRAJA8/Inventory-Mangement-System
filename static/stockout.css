@@ -1,0 +1,868 @@
+/* ===================================
+   Global
+=================================== */
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+    font-family:Arial, Helvetica, sans-serif;
+
+}
+
+body{
+
+    background:#fef2f2;
+
+    color:#1e293b;
+
+}
+
+.page{
+
+    width:92%;
+
+    max-width:1350px;
+
+    margin:35px auto;
+
+}
+
+/* ===================================
+   Breadcrumb
+=================================== */
+
+.breadcrumb{
+
+    font-size:14px;
+
+    color:#64748b;
+
+    margin-bottom:18px;
+
+}
+
+.breadcrumb span{
+
+    color:#dc2626;
+
+    font-weight:bold;
+
+}
+
+/* ===================================
+   Page Title
+=================================== */
+
+.page-title{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
+}
+
+.page-title h1{
+
+    font-size:38px;
+
+    color:#b91c1c;
+
+    margin-bottom:8px;
+
+}
+
+.page-title p{
+
+    color:#64748b;
+
+}
+
+/* ===================================
+   Buttons
+=================================== */
+
+.page-action{
+
+    display:flex;
+
+    gap:15px;
+
+}
+
+.add-btn{
+
+    background:#dc2626;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:14px 24px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.add-btn:hover{
+
+    background:#b91c1c;
+
+}
+
+.back-btn{
+
+    background:#64748b;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:14px 24px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.back-btn:hover{
+
+    background:#475569;
+
+}
+
+/* ===================================
+   Search
+=================================== */
+
+.search-card{
+
+    background:white;
+
+    padding:22px;
+
+    border-radius:15px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.search-card form{
+
+    display:flex;
+
+    gap:15px;
+
+}
+
+.search-card input{
+
+    flex:1;
+
+    padding:15px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+}
+
+.search-card input:focus{
+
+    outline:none;
+
+    border-color:#dc2626;
+
+    box-shadow:0 0 0 4px rgba(220,38,38,.15);
+
+}
+
+.search-card button{
+
+    background:#dc2626;
+
+    color:white;
+
+    border:none;
+
+    padding:15px 28px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.search-card button:hover{
+
+    background:#b91c1c;
+
+}
+
+/* ===================================
+   Table
+=================================== */
+
+.table-card{
+
+    background:white;
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+table th{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+    padding:18px;
+
+    text-align:left;
+
+    font-size:15px;
+
+}
+
+table td{
+
+    padding:18px;
+
+    border-bottom:1px solid #e5e7eb;
+
+}
+
+table tbody tr:hover{
+
+    background:#fef2f2;
+
+}
+
+/* ===================================
+   Quantity Badge
+=================================== */
+
+.qty-badge{
+
+    display:inline-block;
+
+    background:#fee2e2;
+
+    color:#b91c1c;
+
+    padding:8px 16px;
+
+    border-radius:20px;
+
+    font-weight:bold;
+
+    font-size:14px;
+
+}
+
+/* ===================================
+   Form Card
+=================================== */
+
+.card{
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:15px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.card h2{
+
+    color:#b91c1c;
+
+    font-size:26px;
+
+    margin-bottom:30px;
+
+    padding-bottom:15px;
+
+    border-bottom:2px solid #fecaca;
+
+}
+
+/* ===================================
+   Form
+=================================== */
+
+.input-group{
+
+    margin-bottom:25px;
+
+}
+
+.input-group label{
+
+    display:block;
+
+    margin-bottom:10px;
+
+    font-weight:bold;
+
+    color:#334155;
+
+}
+
+.input-group label span{
+
+    color:#dc2626;
+
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea{
+
+    width:100%;
+
+    padding:14px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+    transition:.3s;
+
+    background:white;
+
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus{
+
+    outline:none;
+
+    border-color:#dc2626;
+
+    box-shadow:0 0 0 4px rgba(220,38,38,.15);
+
+}
+
+textarea{
+
+    resize:vertical;
+
+    min-height:120px;
+
+}
+
+select{
+
+    cursor:pointer;
+
+}
+
+/* ===================================
+   Buttons
+=================================== */
+
+.button-group{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:35px;
+
+}
+
+.save-btn{
+
+    background:#dc2626;
+
+    color:white;
+
+    border:none;
+
+    padding:14px 28px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.save-btn:hover{
+
+    background:#b91c1c;
+
+}
+
+.delete-btn{
+
+    background:#ef4444;
+
+    color:white;
+
+    border:none;
+
+    padding:14px 28px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.delete-btn:hover{
+
+    background:#dc2626;
+
+}
+
+/* ===================================
+   Action Buttons
+=================================== */
+
+.action-buttons{
+
+    display:flex;
+
+    gap:8px;
+
+    justify-content:center;
+
+    align-items:center;
+
+    white-space:nowrap;
+
+}
+
+.edit-btn{
+
+    background:#3b82f6;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:10px 15px;
+
+    border-radius:8px;
+
+    transition:.3s;
+
+}
+
+.edit-btn:hover{
+
+    background:#2563eb;
+
+}
+
+.delete-btn{
+
+    background:#ef4444;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:10px 15px;
+
+    border-radius:8px;
+
+    transition:.3s;
+
+}
+
+.delete-btn:hover{
+
+    background:#dc2626;
+
+}
+
+/* ===================================
+   Error Message
+=================================== */
+
+.error-message{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+    padding:15px;
+
+    margin-bottom:20px;
+
+    border-radius:10px;
+
+    border-left:5px solid #ef4444;
+
+    font-weight:bold;
+
+}
+
+/* ===================================
+   Flash Message
+=================================== */
+
+.flash-message{
+
+    padding:15px;
+
+    margin-bottom:20px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+}
+
+.flash-message.success{
+
+    background:#dcfce7;
+
+    color:#166534;
+
+    border-left:5px solid #22c55e;
+
+}
+
+.flash-message.error{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+    border-left:5px solid #ef4444;
+
+}
+
+/* ===================================
+   Empty Data
+=================================== */
+
+.empty-data{
+
+    text-align:center;
+
+    padding:70px 20px;
+
+}
+
+.empty-data h3{
+
+    color:#b91c1c;
+
+    font-size:28px;
+
+    margin-bottom:10px;
+
+}
+
+.empty-data p{
+
+    color:#64748b;
+
+    font-size:15px;
+
+}
+
+/* ===================================
+   Pagination
+=================================== */
+
+.pagination{
+
+    margin-top:30px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.page-info{
+
+    color:#64748b;
+
+    font-size:15px;
+
+}
+
+.page-number{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+.page-number a{
+
+    text-decoration:none;
+
+    background:white;
+
+    color:#334155;
+
+    padding:10px 16px;
+
+    border-radius:8px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.page-number a:hover{
+
+    background:#dc2626;
+
+    color:white;
+
+}
+
+.page-number .active{
+
+    background:#dc2626;
+
+    color:white;
+
+}
+
+/* ===================================
+   Delete Page
+=================================== */
+
+.delete-message{
+
+    text-align:center;
+
+    margin-bottom:25px;
+
+}
+
+.delete-message h3{
+
+    color:#dc2626;
+
+    font-size:28px;
+
+    margin-bottom:10px;
+
+}
+
+.delete-message p{
+
+    color:#64748b;
+
+}
+
+.delete-info{
+
+    background:#f8fafc;
+
+    border:1px solid #cbd5e1;
+
+    border-radius:12px;
+
+    padding:25px;
+
+    margin:25px 0;
+
+}
+
+.delete-info p{
+
+    margin-bottom:15px;
+
+    font-size:16px;
+
+    color:#334155;
+
+}
+
+.delete-info p:last-child{
+
+    margin-bottom:0;
+
+}
+
+.delete-info strong{
+
+    display:inline-block;
+
+    width:170px;
+
+    color:#0f172a;
+
+}
+
+.warning{
+
+    background:#fee2e2;
+
+    color:#b91c1c;
+
+    border-left:5px solid #ef4444;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    margin-bottom:25px;
+
+    font-weight:bold;
+
+}
+
+/* ===================================
+   Readonly Fields
+=================================== */
+
+input[readonly],
+textarea[readonly]{
+
+    background:#f8fafc;
+
+    cursor:not-allowed;
+
+}
+
+/* ===================================
+   Responsive
+=================================== */
+
+@media(max-width:900px){
+
+.page{
+
+    width:95%;
+
+}
+
+.page-title{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:20px;
+
+}
+
+.page-action{
+
+    width:100%;
+
+    flex-direction:column;
+
+}
+
+.search-card form{
+
+    flex-direction:column;
+
+}
+
+.button-group{
+
+    flex-direction:column;
+
+}
+
+.table-card{
+
+    overflow-x:auto;
+
+}
+
+table{
+
+    min-width:950px;
+
+}
+
+}
+
+/* ===================================
+   Custom Scrollbar
+=================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+    height:10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#dc2626;
+
+    border-radius:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#fee2e2;
+
+}

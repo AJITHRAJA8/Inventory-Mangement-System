@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Product Report</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static',
+          filename='reports.css') }}">
+
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- Breadcrumb -->
+
+    <div class="breadcrumb">
+
+        Dashboard >
+
+        Reports >
+
+        <span>Product Report</span>
+
+    </div>
+
+    <!-- Page Title -->
+
+    <div class="page-title">
+
+        <div>
+
+            <h1>📦 Product Report</h1>
+
+            <p>
+
+                View all available products.
+
+            </p>
+
+        </div>
+
+        <div class="page-action">
+
+            <a href="/reports"
+               class="back-btn">
+
+                ← Back
+
+            </a>
+
+            <a href="/export_product_report"
+               class="add-btn">
+
+                📥 Export CSV
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Table -->
+
+    <div class="table-card">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Product</th>
+
+                    <th>Category</th>
+
+                    <th>Supplier</th>
+
+                    <th>Price</th>
+
+                    <th>Stock</th>
+
+                    <th>Status</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% if datas %}
+
+                    {% for row in datas %}
+
+                    <tr>
+
+                        <td>
+
+                            {{ row.product_id }}
+
+                        </td>
+
+                        <td>
+
+                            {{ row.product_name }}
+
+                        </td>
+
+                        <td>
+
+                            {{ row.category_name }}
+
+                        </td>
+
+                        <td>
+
+                            {{ row.supplier_name }}
+
+                        </td>
+
+                        <td>
+
+                            ₹ {{ row.price }}
+
+                        </td>
+
+                        <td>
+
+                            {{ row.stock }}
+
+                        </td>
+
+                        <td>
+
+                            {% if row.stock == 0 %}
+
+                                <span class="status out">
+
+                                    Out of Stock
+
+                                </span>
+
+                            {% elif row.stock <= 10 %}
+
+                                <span class="status low">
+
+                                    Low Stock
+
+                                </span>
+
+                            {% else %}
+
+                                <span class="status available">
+
+                                    In Stock
+
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                {% else %}
+
+                <tr>
+
+                    <td colspan="7"
+                        class="empty-data">
+
+                        <h3>
+
+                            No Products Found
+
+                        </h3>
+
+                        <p>
+
+                            Product report is empty.
+
+                        </p>
+
+                    </td>
+
+                </tr>
+
+                {% endif %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

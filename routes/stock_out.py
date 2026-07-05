@@ -67,6 +67,8 @@ def stock_out():
 
         s.stockout_id,
 
+        c.customer_name,
+
         p.product_name,
 
         s.quantity,
@@ -80,6 +82,10 @@ def stock_out():
         INNER JOIN product p
 
         ON s.product_id = p.product_id
+
+        INNER JOIN CUSTOMER C
+
+        ON c.customer_id = s.customer_id
 
         WHERE
 
@@ -110,6 +116,8 @@ def stock_out():
 
         s.stockout_id,
 
+        c.customer_name,
+
         p.product_name,
 
         s.quantity,
@@ -123,6 +131,10 @@ def stock_out():
         INNER JOIN product p
 
         ON s.product_id = p.product_id
+
+        INNER JOIN CUSTOMER C
+
+        ON c.customer_id = s.customer_id
 
         ORDER BY s.stockout_id DESC
 
@@ -153,5 +165,217 @@ def stock_out():
         current_page=page,
 
         total_pages=total_pages
+
+    )
+
+# ==========================================
+# Add Stock Out
+# ==========================================
+
+@stock_out_bp.route('/add_stock_out', methods=['GET', 'POST'])
+def add_stock_out():
+
+    if 'user' not in session:
+        return redirect(url_for('auth.login'))
+
+    # -----------------------------
+    # Customer Dropdown
+    # -----------------------------
+
+    res = con.cursor()
+
+    sql = """
+    SELECT
+
+    customer_id,
+
+    customer_name
+
+    FROM customer
+
+    ORDER BY customer_name
+    """
+
+    res.execute(sql)
+
+    customers = fetch_all_dict(res)
+
+    # -----------------------------
+    # Product Dropdown
+    # -----------------------------
+
+    res = con.cursor()
+
+    sql = """
+    SELECT
+
+    product_id,
+
+    product_name,
+
+    stock
+
+    FROM product
+
+    ORDER BY product_name
+    """
+
+    res.execute(sql)
+
+    products = fetch_all_dict(res)
+
+    if request.method == "POST":
+
+        customer_id = request.form["customer_id"]
+
+        product_id = request.form["product_id"]
+
+        quantity = int(request.form["quantity"])
+
+        stockout_date = request.form["stockout_date"]
+
+        remarks = request.form["remarks"]
+
+        # -----------------------------
+        # Check Available Stock
+        # -----------------------------
+
+        res = con.cursor()
+
+        sql = """
+        SELECT
+
+        stock
+
+        FROM product
+
+        WHERE product_id = ?
+        """
+
+        res.execute(sql, (product_id,))
+
+        product = fetch_one_dict(res)
+
+        current_stock = product["stock"]
+
+        # -----------------------------
+        # Validation
+        # -----------------------------
+
+        if quantity > current_stock:
+
+            return render_template(
+
+                "add_stock_out.html",
+
+                customers=customers,
+
+                products=products,
+
+                error=f"Insufficient stock. Available Stock : {current_stock}",
+
+                data={
+
+                    "customer_id": customer_id,
+
+                    "product_id": product_id,
+
+                    "quantity": quantity,
+
+                    "stockout_date": stockout_date,
+
+                    "remarks": remarks
+
+                }
+
+            )
+
+        # -----------------------------
+        # Insert Stock Out
+        # -----------------------------
+
+        res = con.cursor()
+
+        sql = """
+        INSERT INTO stock_out
+        (
+            product_id,
+            customer_id,
+            quantity,
+            stockout_date,
+            remarks
+        )
+
+        VALUES
+        (
+            ?, ?, ?, ?, ?
+        )
+        """
+
+        value = (
+
+            product_id,
+
+            customer_id,
+
+            quantity,
+
+            stockout_date,
+
+            remarks
+
+        )
+
+        res.execute(sql, value)
+
+        # -----------------------------
+        # Reduce Product Stock
+        # -----------------------------
+
+        sql = """
+        UPDATE product
+
+        SET stock = stock - ?
+
+        WHERE product_id = ?
+        """
+
+        res.execute(
+
+            sql,
+
+            (
+
+                quantity,
+
+                product_id
+
+            )
+
+        )
+
+        con.commit()
+
+        flash(
+
+            "Stock Out recorded successfully.",
+
+            "success"
+
+        )
+
+        return redirect(
+
+            url_for("stock_out.stock_out")
+
+        )
+
+    return render_template(
+
+        "add_stock_out.html",
+
+        customers=customers,
+
+        products=products
 
     )

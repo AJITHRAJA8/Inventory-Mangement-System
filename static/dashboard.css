@@ -260,3 +260,704 @@ table tbody tr:hover{
    Error Message
 */
 
+
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+    font-family:Arial, Helvetica, sans-serif;
+
+}
+
+body{
+
+    background:#f1f5f9;
+
+    color:#1e293b;
+
+}
+
+.page{
+
+    width:95%;
+
+    max-width:1450px;
+
+    margin:30px auto;
+
+}
+
+/* ===================================
+   Header
+=================================== */
+
+.header{
+
+    background:white;
+
+    border-radius:15px;
+
+    padding:25px 35px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.header h1{
+
+    font-size:34px;
+
+    color:#1e3a8a;
+
+}
+
+.header p{
+
+    color:#64748b;
+
+    margin-top:5px;
+
+}
+
+.welcome{
+
+    background:#dbeafe;
+
+    color:#1d4ed8;
+
+    padding:15px 22px;
+
+    border-radius:30px;
+
+    font-weight:bold;
+
+}
+
+/* ===================================
+   Dashboard Cards
+=================================== */
+
+.dashboard-cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:20px;
+
+    margin-bottom:35px;
+
+}
+
+.card{
+
+    background:white;
+
+    border-radius:15px;
+
+    padding:25px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.card h3{
+
+    color:#64748b;
+
+    font-size:18px;
+
+    margin-bottom:18px;
+
+}
+
+.card h2{
+
+    font-size:42px;
+
+    color:#0f172a;
+
+}
+
+/* ===================================
+   Card Colors
+=================================== */
+
+.products{
+
+    border-left:6px solid #2563eb;
+
+}
+
+.categories{
+
+    border-left:6px solid #7c3aed;
+
+}
+
+.suppliers{
+
+    border-left:6px solid #16a34a;
+
+}
+
+.customers{
+
+    border-left:6px solid #f59e0b;
+
+}
+
+.stockin{
+
+    border-left:6px solid #0891b2;
+
+}
+
+.stockout{
+
+    border-left:6px solid #dc2626;
+
+}
+
+/* ===================================
+   Dashboard Sections
+=================================== */
+
+.section{
+
+    background:white;
+
+    border-radius:15px;
+
+    margin-bottom:30px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    overflow:hidden;
+
+}
+
+.section-title{
+
+    padding:22px 30px;
+
+    border-bottom:1px solid #e5e7eb;
+
+}
+
+.section-title h2{
+
+    color:#1e3a8a;
+
+    font-size:28px;
+
+}
+
+/* ===================================
+   Tables
+=================================== */
+
+.table-wrapper{
+
+    overflow-x:auto;
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+table th{
+
+    background:#eff6ff;
+
+    color:#1e3a8a;
+
+    text-align:left;
+
+    padding:18px;
+
+    font-size:15px;
+
+}
+
+table td{
+
+    padding:18px;
+
+    border-bottom:1px solid #e5e7eb;
+
+    color:#334155;
+
+}
+
+table tbody tr:hover{
+
+    background:#f8fafc;
+
+}
+
+/* ===================================
+   Product Image
+=================================== */
+
+.product-img{
+
+    width:55px;
+
+    height:55px;
+
+    object-fit:cover;
+
+    border-radius:10px;
+
+    border:2px solid #dbeafe;
+
+    background:white;
+
+}
+
+/* ===================================
+   Quantity Badge
+=================================== */
+
+.qty{
+
+    display:inline-block;
+
+    padding:8px 15px;
+
+    border-radius:20px;
+
+    font-weight:bold;
+
+    color:white;
+
+    background:#2563eb;
+
+}
+
+.qty.in{
+
+    background:#16a34a;
+
+}
+
+.qty.out{
+
+    background:#dc2626;
+
+}
+
+/* ===================================
+   Stock Status
+=================================== */
+
+.stock-badge{
+
+    display:inline-block;
+
+    min-width:40px;
+
+    text-align:center;
+
+    padding:8px 14px;
+
+    border-radius:20px;
+
+    background:#fee2e2;
+
+    color:#b91c1c;
+
+    font-weight:bold;
+
+}
+
+/* ===================================
+   Empty Data
+=================================== */
+
+.empty-data{
+
+    text-align:center;
+
+    padding:60px;
+
+    color:#64748b;
+
+}
+
+.empty-data h3{
+
+    font-size:28px;
+
+    color:#2563eb;
+
+    margin-bottom:10px;
+
+}
+
+.empty-data p{
+
+    font-size:15px;
+
+}
+
+/* ===================================
+   Responsive Design
+=================================== */
+
+@media(max-width:992px){
+
+.page{
+
+    width:96%;
+
+}
+
+.header{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:20px;
+
+}
+
+.dashboard-cards{
+
+    grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:768px){
+
+.dashboard-cards{
+
+    grid-template-columns:1fr;
+
+}
+
+.section-title h2{
+
+    font-size:24px;
+
+}
+
+.header h1{
+
+    font-size:28px;
+
+}
+
+.table-wrapper{
+
+    overflow-x:auto;
+
+}
+
+table{
+
+    min-width:850px;
+
+}
+
+}
+
+/* ===================================
+   Custom Scrollbar
+=================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+    height:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#e2e8f0;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#2563eb;
+
+    border-radius:10px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#1d4ed8;
+
+}
+
+/* ===================================
+   Animations
+=================================== */
+
+.card{
+
+    animation:fadeIn .5s ease;
+
+}
+
+.section{
+
+    animation:fadeIn .7s ease;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ===================================
+   Card Number Hover
+=================================== */
+
+.card h2{
+
+    transition:.3s;
+
+}
+
+.card:hover h2{
+
+    transform:scale(1.08);
+
+    color:#2563eb;
+
+}
+
+/* ===================================
+   Table Row Transition
+=================================== */
+
+table tbody tr{
+
+    transition:.2s;
+
+}
+
+table tbody tr:hover{
+
+    transform:scale(1.005);
+
+}
+
+/* ===================================
+   Image Hover
+=================================== */
+
+.product-img{
+
+    transition:.3s;
+
+}
+
+.product-img:hover{
+
+    transform:scale(1.15);
+
+}
+
+/* ===================================
+   Footer Space
+=================================== */
+
+.page{
+
+    padding-bottom:40px;
+
+}
+
+/* ===================================
+   Dashboard Cards
+=================================== */
+
+.dashboard{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+
+    gap:22px;
+
+    margin-bottom:35px;
+
+}
+
+.card{
+
+    color:white;
+
+    padding:28px;
+
+    border-radius:18px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+
+    transition:.35s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 18px 35px rgba(0,0,0,.20);
+
+}
+
+.card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:120px;
+
+    height:120px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.15);
+
+    top:-40px;
+
+    right:-40px;
+
+}
+
+.card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.08);
+
+    bottom:-20px;
+
+    left:-20px;
+
+}
+
+.card h3{
+
+    font-size:18px;
+
+    font-weight:500;
+
+    margin-bottom:20px;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.card h1{
+
+    font-size:48px;
+
+    font-weight:bold;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+/* ===================================
+   Card Colors
+=================================== */
+
+.products{
+
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+
+}
+
+.instock{
+
+    background:linear-gradient(135deg,#16a34a,#15803d);
+
+}
+
+.lowstock{
+
+    background:linear-gradient(135deg,#f59e0b,#d97706);
+
+}
+
+.outstock{
+
+    background:linear-gradient(135deg,#ef4444,#dc2626);
+
+}
+
+.suppliers{
+
+    background:linear-gradient(135deg,#7c3aed,#6d28d9);
+
+}
