@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Update Customer</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='customer.css') }}">
+
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- Breadcrumb -->
+
+    <div class="breadcrumb">
+
+        Dashboard >
+
+        Customer >
+
+        <span>Update Customer</span>
+
+    </div>
+
+    <!-- Page Title -->
+
+    <div class="page-title">
+
+        <div>
+
+            <h1>✏ Update Customer</h1>
+
+            <p>
+
+                Update customer information.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Card -->
+
+    <div class="card">
+
+        <h2>Customer Information</h2>
+
+        {% if error %}
+
+        <div class="error-message">
+
+            {{ error }}
+
+        </div>
+
+        {% endif %}
+
+        <form method="POST">
+
+            <!-- Customer Name -->
+
+            <div class="input-group">
+
+                <label>
+
+                    Customer Name <span>*</span>
+
+                </label>
+
+                <input
+                    type="text"
+                    name="customer_name"
+                    value="{{ data.customer_name }}"
+                    required>
+
+            </div>
+
+            <!-- Phone -->
+
+            <div class="input-group">
+
+                <label>
+
+                    Phone Number <span>*</span>
+
+                </label>
+
+                <input
+                    type="text"
+                    name="phone"
+                    maxlength="10"
+                    value="{{ data.phone }}"
+                    required>
+
+            </div>
+
+            <!-- Email -->
+
+            <div class="input-group">
+
+                <label>
+
+                    Email
+
+                </label>
+
+                <input
+                    type="email"
+                    name="email"
+                    value="{{ data.email if data.email else '' }}">
+
+            </div>
+
+            <!-- Address -->
+
+            <div class="input-group">
+
+                <label>
+
+                    Address
+
+                </label>
+
+                <textarea
+                    name="address"
+                    rows="4">{{ data.address if data.address else '' }}</textarea>
+
+            </div>
+
+            <!-- Buttons -->
+
+            <div class="button-group">
+
+                <button
+                    type="submit"
+                    class="save-btn">
+
+                    💾 Update Customer
+
+                </button>
+
+                <a href="/customer"
+                   class="back-btn">
+
+                    ← Cancel
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
