@@ -1,38 +1,292 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Stock_In</title>
-        
-        <link rel="stylesheet" href="{{url_for('static',filename='category.css')}}">
-    </head>
+<html lang="en">
 
-    <body>
-        <h1>Stock_in</h1>
-        <form action="/stock_in" method="get">
-            <table>
-                <tr>
-                    <th>stock_id</th>
-                    <th>product_id</th>
-                    <th>quantity</th>
-                    <th>stock_date</th>
-                    <th>supplier_id</th>
-                    <th>purchase_price</th>
-                    <th>remarks</th>
-                </tr>
-                {% for row in datas %}
-                <tr>
-                    <td>{{row.sock_id}}</td>
-                    <td>{{row.product_id}}</td>
-                    <td>{{row.quantity}}</td>
-                    <td>{{row.stock_date}}</td>
-                    <td>{{row.supplier_id}}</td>
-                    <td>{{row.purchase_price}}</td>
-                    <td>{{row.remarks}}</td>
+<head>
 
-                </tr>
-                {% endfor %}
-            </table>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Stock In Management</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='stockin.css') }}">
+
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- Breadcrumb -->
+
+    <div class="breadcrumb">
+
+        Dashboard >
+
+        Inventory >
+
+        <span>Stock In</span>
+
+    </div>
+
+    <!-- Flash Message -->
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% if messages %}
+
+            {% for category, message in messages %}
+
+                <div class="flash-message {{ category }}">
+
+                    {{ message }}
+
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
+
+    <!-- Page Title -->
+
+    <div class="page-title">
+
+        <div>
+
+            <h1>📥 Stock In Management</h1>
+
+            <p>
+
+                View and manage all incoming inventory from suppliers.
+
+            </p>
+
+        </div>
+
+        <div class="page-action">
+
+            <a href="/home"
+               class="back-btn">
+
+                🏠 Dashboard
+
+            </a>
+
+            <a href="/add_stock_in"
+               class="add-btn">
+
+                ➕ Stock In
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Search -->
+
+    <div class="search-card">
+
+        <form action="/stock_in"
+              method="GET">
+
+            <input
+                type="text"
+                name="search"
+                placeholder="🔍 Search Product or Supplier..."
+                value="{{ search if search else '' }}">
+
+            <button type="submit">
+
+                Search
+
+            </button>
 
         </form>
-    </body>
+
+    </div>
+
+    <!-- Table -->
+
+    <div class="table-card">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Product</th>
+
+                    <th>Supplier</th>
+
+                    <th>Quantity</th>
+
+                    <th>Purchase Price</th>
+
+                    <th>Date</th>
+
+                    <th>Remarks</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% if datas %}
+
+                    {% for row in datas %}
+
+                    <tr>
+
+                        <td>
+
+                            {{ row.stockin_id }}
+
+                        </td>
+
+                        <td>
+
+                            {{ row.product_name }}
+
+                        </td>
+
+                        <td>
+
+                            {{ row.supplier_name }}
+
+                        </td>
+
+                        <td>
+
+                            <span class="qty-badge">
+
+                                +{{ row.quantity }}
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            ₹ {{ "%.2f"|format(row.purchase_price) }}
+
+                        </td>
+
+                        <td>
+
+                            {{ row.stock_in_date }}
+
+                        </td>
+
+                        <td>
+
+                            {{ row.remarks if row.remarks else "-" }}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                {% else %}
+
+                <tr>
+
+                    <td colspan="7"
+                        class="empty-data">
+
+                        <h3>
+
+                            📥 No Stock Records Found
+
+                        </h3>
+
+                        <p>
+
+                            Click <strong>Stock In</strong> to add your first inventory entry.
+
+                        </p>
+
+                    </td>
+
+                </tr>
+
+                {% endif %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- Pagination -->
+
+    <div class="pagination">
+
+        <div class="page-info">
+
+            Showing Page {{ current_page }} of {{ total_pages }}
+
+        </div>
+
+        <div class="page-number">
+
+            {% if current_page > 1 %}
+
+            <a href="{{ url_for('stock_in.stock_in',
+                                page=current_page-1,
+                                search=search) }}">
+
+                Previous
+
+            </a>
+
+            {% endif %}
+
+            {% for i in range(1, total_pages + 1) %}
+
+            <a href="{{ url_for('stock_in.stock_in',
+                                page=i,
+                                search=search) }}"
+
+                {% if i == current_page %}
+
+                    class="active"
+
+                {% endif %}>
+
+                {{ i }}
+
+            </a>
+
+            {% endfor %}
+
+            {% if current_page < total_pages %}
+
+            <a href="{{ url_for('stock_in.stock_in',
+                                page=current_page+1,
+                                search=search) }}">
+
+                Next
+
+            </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
 </html>

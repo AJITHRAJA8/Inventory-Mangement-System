@@ -1,0 +1,679 @@
+/* ===================================
+   Global
+=================================== */
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+    font-family:Arial, Helvetica, sans-serif;
+
+}
+
+body{
+
+    background:#fff8f1;
+
+    color:#1e293b;
+
+}
+
+.page{
+
+    width:92%;
+
+    max-width:1350px;
+
+    margin:35px auto;
+
+}
+
+/* ===================================
+   Breadcrumb
+=================================== */
+
+.breadcrumb{
+
+    font-size:14px;
+
+    color:#64748b;
+
+    margin-bottom:18px;
+
+}
+
+.breadcrumb span{
+
+    color:#ea580c;
+
+    font-weight:bold;
+
+}
+
+/* ===================================
+   Page Title
+=================================== */
+
+.page-title{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
+}
+
+.page-title h1{
+
+    font-size:38px;
+
+    color:#c2410c;
+
+    margin-bottom:8px;
+
+}
+
+.page-title p{
+
+    color:#64748b;
+
+}
+
+/* ===================================
+   Buttons
+=================================== */
+
+.page-action{
+
+    display:flex;
+
+    gap:15px;
+
+}
+
+.add-btn{
+
+    background:#ea580c;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:14px 24px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.add-btn:hover{
+
+    background:#c2410c;
+
+}
+
+.back-btn{
+
+    background:#64748b;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:14px 24px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.back-btn:hover{
+
+    background:#475569;
+
+}
+
+/* ===================================
+   Search
+=================================== */
+
+.search-card{
+
+    background:white;
+
+    padding:22px;
+
+    border-radius:15px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.search-card form{
+
+    display:flex;
+
+    gap:15px;
+
+}
+
+.search-card input{
+
+    flex:1;
+
+    padding:15px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+}
+
+.search-card input:focus{
+
+    outline:none;
+
+    border-color:#ea580c;
+
+    box-shadow:0 0 0 4px rgba(234,88,12,.15);
+
+}
+
+.search-card button{
+
+    background:#ea580c;
+
+    color:white;
+
+    border:none;
+
+    padding:15px 28px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.search-card button:hover{
+
+    background:#c2410c;
+
+}
+
+/* ===================================
+   Table
+=================================== */
+
+.table-card{
+
+    background:white;
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+table th{
+
+    background:#ffedd5;
+
+    color:#9a3412;
+
+    padding:18px;
+
+    text-align:left;
+
+    font-size:15px;
+
+}
+
+table td{
+
+    padding:18px;
+
+    border-bottom:1px solid #e5e7eb;
+
+}
+
+table tbody tr:hover{
+
+    background:#fff7ed;
+
+}
+
+/* ===================================
+   Quantity Badge
+=================================== */
+
+.qty-badge{
+
+    display:inline-block;
+
+    background:#fed7aa;
+
+    color:#9a3412;
+
+    padding:8px 16px;
+
+    border-radius:20px;
+
+    font-weight:bold;
+
+    font-size:14px;
+
+}
+
+/* ===================================
+   Form Card
+=================================== */
+
+.card{
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:15px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.card h2{
+
+    color:#c2410c;
+
+    font-size:26px;
+
+    margin-bottom:30px;
+
+    padding-bottom:15px;
+
+    border-bottom:2px solid #fed7aa;
+
+}
+
+/* ===================================
+   Form
+=================================== */
+
+.input-group{
+
+    margin-bottom:25px;
+
+}
+
+.input-group label{
+
+    display:block;
+
+    margin-bottom:10px;
+
+    font-weight:bold;
+
+    color:#374151;
+
+}
+
+.input-group label span{
+
+    color:#dc2626;
+
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea{
+
+    width:100%;
+
+    padding:14px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+    transition:.3s;
+
+    background:white;
+
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus{
+
+    outline:none;
+
+    border-color:#ea580c;
+
+    box-shadow:0 0 0 4px rgba(234,88,12,.15);
+
+}
+
+textarea{
+
+    resize:vertical;
+
+    min-height:120px;
+
+}
+
+select{
+
+    cursor:pointer;
+
+}
+
+/* ===================================
+   Buttons
+=================================== */
+
+.button-group{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:35px;
+
+}
+
+.save-btn{
+
+    background:#ea580c;
+
+    color:white;
+
+    border:none;
+
+    padding:14px 28px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.save-btn:hover{
+
+    background:#c2410c;
+
+}
+
+/* ===================================
+   Error Message
+=================================== */
+
+.error-message{
+
+    background:#fee2e2;
+
+    color:#b91c1c;
+
+    padding:15px;
+
+    margin-bottom:20px;
+
+    border-radius:10px;
+
+    border-left:5px solid #ef4444;
+
+    font-weight:bold;
+
+}
+
+/* ===================================
+   Flash Message
+=================================== */
+
+.flash-message{
+
+    padding:15px;
+
+    margin-bottom:20px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+}
+
+.flash-message.success{
+
+    background:#dcfce7;
+
+    color:#166534;
+
+    border-left:5px solid #22c55e;
+
+}
+
+.flash-message.error{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+    border-left:5px solid #ef4444;
+
+}
+
+/* ===================================
+   Empty Data
+=================================== */
+
+.empty-data{
+
+    text-align:center;
+
+    padding:70px 20px;
+
+}
+
+.empty-data h3{
+
+    color:#c2410c;
+
+    font-size:28px;
+
+    margin-bottom:10px;
+
+}
+
+.empty-data p{
+
+    color:#64748b;
+
+    font-size:15px;
+
+}
+
+/* ===================================
+   Pagination
+=================================== */
+
+.pagination{
+
+    margin-top:30px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.page-info{
+
+    color:#64748b;
+
+    font-size:15px;
+
+}
+
+.page-number{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+.page-number a{
+
+    text-decoration:none;
+
+    background:white;
+
+    color:#334155;
+
+    padding:10px 16px;
+
+    border-radius:8px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.page-number a:hover{
+
+    background:#ea580c;
+
+    color:white;
+
+}
+
+.page-number .active{
+
+    background:#ea580c;
+
+    color:white;
+
+}
+
+/* ===================================
+   Responsive
+=================================== */
+
+@media(max-width:900px){
+
+.page{
+
+    width:95%;
+
+}
+
+.page-title{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:20px;
+
+}
+
+.page-action{
+
+    width:100%;
+
+    flex-direction:column;
+
+}
+
+.search-card form{
+
+    flex-direction:column;
+
+}
+
+.button-group{
+
+    flex-direction:column;
+
+}
+
+.table-card{
+
+    overflow-x:auto;
+
+}
+
+table{
+
+    min-width:900px;
+
+}
+
+}
+
+/* ===================================
+   Custom Scrollbar
+=================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+    height:10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#ea580c;
+
+    border-radius:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#ffedd5;
+
+}

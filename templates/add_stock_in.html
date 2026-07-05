@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Stock In</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='stockin.css') }}">
+
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- Breadcrumb -->
+
+    <div class="breadcrumb">
+
+        Dashboard >
+
+        Inventory >
+
+        Stock In >
+
+        <span>Add Stock</span>
+
+    </div>
+
+    <!-- Title -->
+
+    <div class="page-title">
+
+        <div>
+
+            <h1>📥 Add Stock In</h1>
+
+            <p>
+
+                Add new stock received from suppliers.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Card -->
+
+    <div class="card">
+
+        <h2>Stock Information</h2>
+
+        {% if error %}
+
+        <div class="error-message">
+
+            {{ error }}
+
+        </div>
+
+        {% endif %}
+
+        <form method="POST">
+
+            <!-- Product -->
+
+            <div class="input-group">
+
+                <label>Product <span>*</span></label>
+
+                <select name="product_id" required>
+
+                    <option value="">-- Select Product --</option>
+
+                    {% for product in products %}
+
+                    <option value="{{ product.product_id }}">
+
+                        {{ product.product_name }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <!-- Supplier -->
+
+            <div class="input-group">
+
+                <label>Supplier <span>*</span></label>
+
+                <select name="supplier_id" required>
+
+                    <option value="">-- Select Supplier --</option>
+
+                    {% for supplier in suppliers %}
+
+                    <option value="{{ supplier.supplier_id }}">
+
+                        {{ supplier.supplier_name }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <!-- Quantity -->
+
+            <div class="input-group">
+
+                <label>Quantity <span>*</span></label>
+
+                <input
+                    type="number"
+                    name="quantity"
+                    min="1"
+                    required>
+
+            </div>
+
+            <!-- Purchase Price -->
+
+            <div class="input-group">
+
+                <label>Purchase Price <span>*</span></label>
+
+                <input
+                    type="number"
+                    name="purchase_price"
+                    step="0.01"
+                    min="0"
+                    required>
+
+            </div>
+
+            <!-- Date -->
+
+            <div class="input-group">
+
+                <label>Stock In Date <span>*</span></label>
+
+                <input
+                    type="date"
+                    name="stock_in_date"
+                    required>
+
+            </div>
+
+            <!-- Remarks -->
+
+            <div class="input-group">
+
+                <label>Remarks</label>
+
+                <textarea
+                    name="remarks"
+                    rows="4"
+                    placeholder="Enter remarks..."></textarea>
+
+            </div>
+
+            <div class="button-group">
+
+                <button
+                    class="save-btn">
+
+                    💾 Save Stock
+
+                </button>
+
+                <a href="/stock_in"
+                   class="back-btn">
+
+                    ← Back
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html> 
