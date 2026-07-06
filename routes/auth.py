@@ -1,7 +1,7 @@
 from flask import Blueprint,session,render_template,request,redirect,url_for
 #connect with database
 from database import con
-from helpers import fetch_all_dict, fetch_one_dict
+from helpers import  fetch_one_dict
 
 auth_bp = Blueprint('auth',__name__)
 
