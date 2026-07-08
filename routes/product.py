@@ -2,7 +2,6 @@ from flask import Blueprint, render_template, session, redirect, url_for, reques
 from database import con
 import os
 import uuid
-from werkzeug.utils import secure_filename
 from helpers import fetch_all_dict, fetch_one_dict
 import math
 
@@ -440,7 +439,7 @@ def update_product(product_id):
                     os.remove(old_path)
 
         # ==========================
-        # Update Database
+        # Update product
         # ==========================
 
         res = con.cursor()
