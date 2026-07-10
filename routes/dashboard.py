@@ -42,11 +42,7 @@ def home():
 
     res = con.cursor()
 
-    sql = """
-    SELECT COUNT(*) AS status
-    FROM product
-    WHERE stock BETWEEN 1 AND 10
-    """
+    sql = "EXEC usp_Product_GetLowStockCount"
 
     res.execute(sql)
 
@@ -58,11 +54,7 @@ def home():
 
     res = con.cursor()
 
-    sql = """
-    SELECT COUNT(*) AS out_stock
-    FROM product
-    WHERE stock = 0
-    """
+    sql = "EXEC usp_Product_GetOutOfStockCount"
 
     res.execute(sql)
 
@@ -74,10 +66,7 @@ def home():
 
     res = con.cursor()
 
-    sql = """
-    SELECT COUNT(*) AS total_supplier
-    FROM supplier
-    """
+    sql = "EXEC usp_Supplier_GetCount"
 
     res.execute(sql)
 
@@ -89,33 +78,7 @@ def home():
 
     res = con.cursor()
 
-    sql = """
-
-    SELECT TOP 3
-
-        p.image,
-
-        p.product_name,
-
-        s.supplier_name,
-
-        si.stockin_date,
-
-        si.quantity
-
-    FROM stock_in si
-
-    INNER JOIN product p
-
-        ON si.product_id = p.product_id
-
-    INNER JOIN supplier s
-
-        ON si.supplier_id = s.supplier_id
-
-    ORDER BY si.stockin_date DESC
-
-    """
+    sql = "EXEC usp_StockIn_GetRecent"
 
     res.execute(sql)
 
@@ -127,33 +90,7 @@ def home():
 
     res = con.cursor()
 
-    sql = """
-
-    SELECT TOP 3
-
-        p.image,
-
-        p.product_name,
-
-        c.customer_name,
-
-        so.stockout_date,
-
-        so.quantity
-
-    FROM stock_out so
-
-    INNER JOIN product p
-
-        ON so.product_id = p.product_id
-
-    INNER JOIN customer c
-
-        ON so.customer_id = c.customer_id
-
-    ORDER BY so.stockout_date DESC
-
-    """
+    sql = "EXEC usp_StockOut_GetRecent"
 
     res.execute(sql)
 
@@ -165,23 +102,7 @@ def home():
 
     res = con.cursor()
 
-    sql = """
-
-    SELECT TOP 3
-
-        product_name,
-
-        image,
-
-        stock
-
-    FROM product
-
-    WHERE stock BETWEEN 1 AND 10
-
-    ORDER BY stock ASC
-
-    """
+    sql = "EXEC usp_Product_GetLowStockList"
 
     res.execute(sql)
 
