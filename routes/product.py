@@ -248,20 +248,7 @@ def add_product():
 
         res = con.cursor()
 
-        sql = """
-        INSERT INTO product
-        (
-            product_name,
-            category_id,
-            supplier_id,
-            price,
-            stock,
-            image,
-            description
-        )
-        VALUES
-        (?, ?, ?, ?, ?, ?, ?)
-        """
+        sql = 'exec getvalue ?,?,?,?,?,?,?'
 
         value = (
             product_name,

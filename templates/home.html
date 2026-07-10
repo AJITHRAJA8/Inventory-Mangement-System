@@ -1,245 +1,305 @@
-{% extends "layout.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %}Dashboard{% endblock %}
-{% block page_title %}Inventory Dashboard{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
 
-{% block content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+</head>
 
-<!-- ================= Dashboard Header ================= -->
-<div class="dashboard-header">
-    <div class="header-left">
-        <h1>📊 Inventory Dashboard</h1>
-        <p>Welcome back, <strong>{{ session.user }}</strong></p>
-        <span>Manage your inventory efficiently from one place.</span>
-    </div>
+<body>
 
-    <div class="header-right">
-        <div class="welcome-card">
-            <h2>👋 Welcome</h2>
-            <h3>{{ session.user }}</h3>
-            <p>Administrator</p>
+<div class="container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>Inventory</h2>
+            <p>Management System</p>
         </div>
+
+        <ul>
+            <li><a href="{{ url_for('dashboard.home') }}">🏠 Dashboard</a></li>
+            <li><a href="{{ url_for('product.product') }}">📦 Products</a></li>
+            <li><a href="{{ url_for('category.category') }}">📂 Categories</a></li>
+            <li><a href="{{ url_for('supplier.supplier') }}">🚚 Suppliers</a></li>
+            <li><a href="{{ url_for('customer.customer') }}">👥 Customers</a></li>
+            <li><a href="{{ url_for('stock_in.stock_in') }}">📥 Stock In</a></li>
+            <li><a href="{{ url_for('stock_out.stock_out') }}">📤 Stock Out</a></li>
+            <li><a href="#">⚙ Settings</a></li>
+            <li><a href="{{ url_for('auth.logout') }}">🚪 Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main -->
+    <div class="main-content">
+
+        <header class="navbar">
+            <h2>Inventory Dashboard</h2>
+            <div class="user">
+                Welcome {{ session['user'] }}
+            </div>
+        </header>
+
+        <!-- ================= Dashboard Header ================= -->
+        <div class="dashboard-header">
+            <div class="header-left">
+                <h1>📊 Inventory Dashboard</h1>
+                <p>Welcome back, <strong>{{ session.user }}</strong></p>
+                <span>Manage your inventory efficiently from one place.</span>
+            </div>
+
+            <div class="header-right">
+                <div class="welcome-card">
+                    <h2>👋 Welcome</h2>
+                    <h3>{{ session.user }}</h3>
+                    <p>Administrator</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= Dashboard Cards ================= -->
+        <div class="dashboard">
+            <div class="card products">
+                <h3>📦 Total Products</h3>
+                <h1>{{ datas.total_count }}</h1>
+            </div>
+
+            <div class="card instock">
+                <h3>✅ In Stock</h3>
+                <h1>{{ stock.total_stockin }}</h1>
+            </div>
+
+            <div class="card lowstock">
+                <h3>⚠ Low Stock</h3>
+                <h1>{{ low.status }}</h1>
+            </div>
+
+            <div class="card outstock">
+                <h3>❌ Out of Stock</h3>
+                <h1>{{ out.out_stock }}</h1>
+            </div>
+
+            <div class="card suppliers">
+                <h3>🚚 Total Suppliers</h3>
+                <h1>{{ supplier.total_supplier }}</h1>
+            </div>
+        </div>
+
+        <!-- ================= Quick Actions ================= -->
+        <div class="quick-actions">
+            <div class="section-title">
+                <h2>⚡ Quick Actions</h2>
+                <p>Frequently used operations</p>
+            </div>
+
+            <div class="action-grid">
+
+                <a href="{{ url_for('product.product') }}" class="action-card">
+                    <div class="action-icon">📦</div>
+                    <h3>Products</h3>
+                    <p>Add, Edit & Manage Products</p>
+                </a>
+
+                <a href="{{ url_for('supplier.supplier') }}" class="action-card">
+                    <div class="action-icon">🚚</div>
+                    <h3>Suppliers</h3>
+                    <p>Manage Supplier Details</p>
+                </a>
+
+                <a href="{{ url_for('customer.customer') }}" class="action-card">
+                    <div class="action-icon">👥</div>
+                    <h3>Customers</h3>
+                    <p>View & Manage Customers</p>
+                </a>
+
+                <a href="{{ url_for('stock_in.stock_in') }}" class="action-card">
+                    <div class="action-icon">📥</div>
+                    <h3>Stock In</h3>
+                    <p>Add New Inventory Stock</p>
+                </a>
+
+                <a href="{{ url_for('stock_out.stock_out') }}" class="action-card">
+                    <div class="action-icon">📤</div>
+                    <h3>Stock Out</h3>
+                    <p>Sell & Dispatch Products</p>
+                </a>
+
+            </div>
+        </div>
+
+        <!-- ================= Dashboard Tables ================= -->
+        <div class="content-row">
+
+            <!-- Recent Stock In -->
+            <div class="table-box">
+                <div class="table-header">
+                    <h3>📥 Recent Stock In</h3>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Product</th>
+                            <th>Supplier</th>
+                            <th>Date</th>
+                            <th>Qty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if recent_stockin %}
+                            {% for row in recent_stockin %}
+                            <tr>
+                                <td>
+                                    {% if row.image %}
+                                        <img src="{{ url_for('static', filename='images/' + row.image) }}" class="product-img" alt="Product">
+                                    {% else %}
+                                        <img src="{{ url_for('static', filename='images/no-image.jpg') }}" class="product-img" alt="No Image">
+                                    {% endif %}
+                                </td>
+                                <td>{{ row.product_name }}</td>
+                                <td>{{ row.supplier_name }}</td>
+                                <td>{{ row.stockin_date }}</td>
+                                <td><span class="qty in">+{{ row.quantity }}</span></td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="5" class="empty-data">No Stock In Records</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Recent Stock Out -->
+            <div class="table-box">
+                <div class="table-header">
+                    <h3>📤 Recent Stock Out</h3>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Product</th>
+                            <th>Customer</th>
+                            <th>Date</th>
+                            <th>Qty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if recent_stockout %}
+                            {% for row in recent_stockout %}
+                            <tr>
+                                <td>
+                                    {% if row.image %}
+                                    <img src="{{url_for('static',filename='images/' + row.image)}}"class="product-img" alt="Product">
+                                    {% else %}
+                                    <img src="{{url_for('static',filename='image/no-image.jpg')}}"class="product-img" alt="No Image">
+                                    {% endif %}
+                                    
+                                </td>
+                                <td>{{ row.product_name }}</td>
+                                <td>{{ row.customer_name }}</td>
+                                <td>{{ row.stockout_date }}</td>
+                                <td><span class="qty out">-{{ row.quantity }}</span></td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="4" class="empty-data">No Stock Out Records</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <!-- ================= Bottom Section ================= -->
+        <div class="content-row">
+
+            <!-- Low Stock Alert -->
+            <div class="table-box">
+                <div class="table-header">
+                    <h3>⚠ Low Stock Alert</h3>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Product</th>
+                            <th>Stock</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if low_stock_products %}
+                            {% for row in low_stock_products %}
+                            <tr>
+                                <td>
+                                    {% if row.image %}
+                                        <img src="{{ url_for('static', filename='images/' + row.image) }}" class="product-img" alt="Product">
+                                    {% else %}
+                                        <img src="{{ url_for('static', filename='images/no-image.jpg') }}" class="product-img" alt="No Image">
+                                    {% endif %}
+                                </td>
+                                <td>{{ row.product_name }}</td>
+                                <td><span class="low-stock">{{ row.stock }}</span></td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="3" class="empty-data">🎉 No Low Stock Products</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Inventory Summary -->
+            <div class="table-box">
+                <div class="table-header">
+                    <h3>📌 Inventory Summary</h3>
+                </div>
+
+                <div class="summary-box">
+                    <div class="summary-item">
+                        <span>📦 Products</span>
+                        <strong>{{ datas.total_count }}</strong>
+                    </div>
+
+                    <div class="summary-item">
+                        <span>🚚 Suppliers</span>
+                        <strong>{{ supplier.total_supplier }}</strong>
+                    </div>
+
+                    <div class="summary-item">
+                        <span>✅ In Stock</span>
+                        <strong>{{ stock.total_stockin }}</strong>
+                    </div>
+
+                    <div class="summary-item">
+                        <span>⚠ Low Stock</span>
+                        <strong>{{ low.status }}</strong>
+                    </div>
+
+                    <div class="summary-item">
+                        <span>❌ Out of Stock</span>
+                        <strong>{{ out.out_stock }}</strong>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 </div>
 
-<!-- ================= Dashboard Cards ================= -->
-<div class="dashboard">
-    <div class="card products">
-        <h3>📦 Total Products</h3>
-        <h1>{{ datas.total_count }}</h1>
-    </div>
+</body>
 
-    <div class="card instock">
-        <h3>✅ In Stock</h3>
-        <h1>{{ stock.total_stockin }}</h1>
-    </div>
-
-    <div class="card lowstock">
-        <h3>⚠ Low Stock</h3>
-        <h1>{{ low.status }}</h1>
-    </div>
-
-    <div class="card outstock">
-        <h3>❌ Out of Stock</h3>
-        <h1>{{ out.out_stock }}</h1>
-    </div>
-
-    <div class="card suppliers">
-        <h3>🚚 Total Suppliers</h3>
-        <h1>{{ supplier.total_supplier }}</h1>
-    </div>
-</div>
-
-<!-- ================= Quick Actions ================= -->
-<div class="quick-actions">
-    <div class="section-title">
-        <h2>⚡ Quick Actions</h2>
-        <p>Frequently used operations</p>
-    </div>
-
-    <div class="action-grid">
-
-        <a href="{{ url_for('product.product') }}" class="action-card">
-            <div class="action-icon">📦</div>
-            <h3>Products</h3>
-            <p>Add, Edit & Manage Products</p>
-        </a>
-
-        <a href="{{ url_for('supplier.supplier') }}" class="action-card">
-            <div class="action-icon">🚚</div>
-            <h3>Suppliers</h3>
-            <p>Manage Supplier Details</p>
-        </a>
-
-        <a href="{{ url_for('customer.customer') }}" class="action-card">
-            <div class="action-icon">👥</div>
-            <h3>Customers</h3>
-            <p>View & Manage Customers</p>
-        </a>
-
-        <a href="{{ url_for('stock_in.stock_in') }}" class="action-card">
-            <div class="action-icon">📥</div>
-            <h3>Stock In</h3>
-            <p>Add New Inventory Stock</p>
-        </a>
-
-        <a href="{{ url_for('stock_out.stock_out') }}" class="action-card">
-            <div class="action-icon">📤</div>
-            <h3>Stock Out</h3>
-            <p>Sell & Dispatch Products</p>
-        </a>
-
-    </div>
-</div>
-
-<!-- ================= Dashboard Tables ================= -->
-<div class="content-row">
-
-    <!-- Recent Stock In -->
-    <div class="table-box">
-        <div class="table-header">
-            <h3>📥 Recent Stock In</h3>
-        </div>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Supplier</th>
-                    <th>Date</th>
-                    <th>Qty</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% if recent_stockin %}
-                    {% for row in recent_stockin %}
-                    <tr>
-                        <td>{{ row.product_name }}</td>
-                        <td>{{ row.supplier_name }}</td>
-                        <td>{{ row.stockin_date }}</td>
-                        <td><span class="qty in">+{{ row.quantity }}</span></td>
-                    </tr>
-                    {% endfor %}
-                {% else %}
-                    <tr>
-                        <td colspan="4" class="empty-data">No Stock In Records</td>
-                    </tr>
-                {% endif %}
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Recent Stock Out -->
-    <div class="table-box">
-        <div class="table-header">
-            <h3>📤 Recent Stock Out</h3>
-        </div>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Customer</th>
-                    <th>Date</th>
-                    <th>Qty</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% if recent_stockout %}
-                    {% for row in recent_stockout %}
-                    <tr>
-                        <td>{{ row.product_name }}</td>
-                        <td>{{ row.customer_name }}</td>
-                        <td>{{ row.stockout_date }}</td>
-                        <td><span class="qty out">-{{ row.quantity }}</span></td>
-                    </tr>
-                    {% endfor %}
-                {% else %}
-                    <tr>
-                        <td colspan="4" class="empty-data">No Stock Out Records</td>
-                    </tr>
-                {% endif %}
-            </tbody>
-        </table>
-    </div>
-
-</div>
-
-<!-- ================= Bottom Section ================= -->
-<div class="content-row">
-
-    <!-- Low Stock Alert -->
-    <div class="table-box">
-        <div class="table-header">
-            <h3>⚠ Low Stock Alert</h3>
-        </div>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>Product</th>
-                    <th>Stock</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% if low_stock_products %}
-                    {% for row in low_stock_products %}
-                    <tr>
-                        <td>
-                            {% if row.image %}
-                                <img src="{{ url_for('static', filename='images/' + row.image) }}" class="product-img" alt="Product">
-                            {% else %}
-                                <img src="{{ url_for('static', filename='images/no-image.jpg') }}" class="product-img" alt="No Image">
-                            {% endif %}
-                        </td>
-                        <td>{{ row.product_name }}</td>
-                        <td><span class="low-stock">{{ row.stock }}</span></td>
-                    </tr>
-                    {% endfor %}
-                {% else %}
-                    <tr>
-                        <td colspan="3" class="empty-data">🎉 No Low Stock Products</td>
-                    </tr>
-                {% endif %}
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Inventory Summary -->
-    <div class="table-box">
-        <div class="table-header">
-            <h3>📌 Inventory Summary</h3>
-        </div>
-
-        <div class="summary-box">
-            <div class="summary-item">
-                <span>📦 Products</span>
-                <strong>{{ datas.total_count }}</strong>
-            </div>
-
-            <div class="summary-item">
-                <span>🚚 Suppliers</span>
-                <strong>{{ supplier.total_supplier }}</strong>
-            </div>
-
-            <div class="summary-item">
-                <span>✅ In Stock</span>
-                <strong>{{ stock.total_stockin }}</strong>
-            </div>
-
-            <div class="summary-item">
-                <span>⚠ Low Stock</span>
-                <strong>{{ low.status }}</strong>
-            </div>
-
-            <div class="summary-item">
-                <span>❌ Out of Stock</span>
-                <strong>{{ out.out_stock }}</strong>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-{% endblock %}
+</html>

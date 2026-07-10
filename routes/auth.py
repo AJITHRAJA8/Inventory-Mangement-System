@@ -24,7 +24,7 @@ def register():
         
         #Username check
         res = con.cursor()
-        sql = 'select * from users where username=?'
+        sql = 'EXEC usp_User_GetByUsername ?'
         value = (username,)
         res.execute(sql,value)
         user = fetch_one_dict(res)
@@ -38,7 +38,7 @@ def register():
             )
         #insert data
         res=con.cursor()
-        sql = "INSERT INTO users(username, password) VALUES(?, ?)"
+        sql = "EXEC usp_User_Insert ?,?"
         value =(username,password)
         res.execute(sql,value)
         con.commit()
@@ -56,7 +56,7 @@ def login():
         password = request.form['password']
 
         res=con.cursor()
-        sql='select * from users where username=?'
+        sql='EXEC usp_User_GetByUsername ?'
         value=(username,)
         res.execute(sql,value)
 

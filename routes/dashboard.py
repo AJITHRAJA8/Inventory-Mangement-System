@@ -18,10 +18,7 @@ def home():
 
     res = con.cursor()
 
-    sql = """
-    SELECT COUNT(*) AS total_count
-    FROM product
-    """
+    sql = "EXEC usp_Product_GetCount"
 
     res.execute(sql)
 
@@ -33,11 +30,7 @@ def home():
 
     res = con.cursor()
 
-    sql = """
-    SELECT COUNT(*) AS total_stockin
-    FROM product
-    WHERE stock > 10
-    """
+    sql = "EXEC usp_Product_GetStockInCount"
 
     res.execute(sql)
 
@@ -100,6 +93,8 @@ def home():
 
     SELECT TOP 3
 
+        p.image,
+
         p.product_name,
 
         s.supplier_name,
@@ -135,6 +130,8 @@ def home():
     sql = """
 
     SELECT TOP 3
+
+        p.image,
 
         p.product_name,
 
@@ -211,3 +208,4 @@ def home():
         low_stock_products=low_stock_products
 
     )
+
