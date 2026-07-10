@@ -31,13 +31,9 @@ def category():
     if search:
 
         # Total Search Records
-        sql = """
-        SELECT COUNT(*) AS total
-        FROM category
-        WHERE category_name LIKE ?
-        """
+        sql = "EXEC usp_Category_SearchCount ?"
 
-        value = ('%' + search + '%',)
+        value = (search ,)
 
         res.execute(sql, value)
 
@@ -59,10 +55,7 @@ def category():
     else:
 
         # Total Records
-        sql = """
-        SELECT COUNT(*) AS total
-        FROM category
-        """
+        sql = "EXEC usp_Category_Count"
 
         res.execute(sql)
 
@@ -105,7 +98,7 @@ def add_category():
 
         # Check Duplicate Category
         res = con.cursor()
-        sql = 'select * from category where category_name = ?'
+        sql = 'EXEC usp_Category_GetByName ?'
         value = (category_name,)
         res.execute(sql, value)
         category = fetch_one_dict(res)
@@ -120,15 +113,7 @@ def add_category():
 
         res = con.cursor()
 
-        sql = """
-        INSERT INTO category
-        (
-            category_name,
-            description
-        )
-        VALUES
-        (?, ?)
-        """
+        sql = "EXEC usp_Category_Insert ?, ?"
 
         value = (
             category_name,
@@ -161,12 +146,7 @@ def update_category(category_id):
 
         # Check Duplicate Category
 
-        sql = """
-        SELECT *
-        FROM category
-        WHERE category_name = ?
-        AND category_id <> ?
-        """
+        sql = "EXEC usp_Category_GetByNameExcludingId ?, ?"
 
         value = (
             category_name,
@@ -190,13 +170,7 @@ def update_category(category_id):
             )
 
         # Update Category
-        sql = """
-        UPDATE category
-        SET
-            category_name = ?,
-            description = ?
-        WHERE category_id = ?
-        """
+        sql = "EXEC usp_Category_Update ?, ?, ?"
 
         value = (
             category_name,
@@ -214,11 +188,7 @@ def update_category(category_id):
     # Display Current Category
 
 
-    sql = """
-    SELECT *
-    FROM category
-    WHERE category_id = ?
-    """
+    sql = "EXEC usp_Category_GetById ?"
 
     res.execute(sql, (category_id,))
 
@@ -240,10 +210,7 @@ def delete_category(category_id):
 
     if request.method == 'POST':
 
-        sql = """
-        DELETE FROM category
-        WHERE category_id = ?
-        """
+        sql = "EXEC usp_Category_Delete ?"
 
         res.execute(sql, (category_id,))
 
@@ -251,15 +218,14 @@ def delete_category(category_id):
 
         return redirect(url_for('category.category'))
 
-    sql = """
-    SELECT *
-    FROM category
-    WHERE category_id = ?
-    """
+    sql = "EXEC usp_Category_GetById ?"
 
     res.execute(sql, (category_id,))
 
     result = fetch_one_dict(res)
+
+    con.commit()
+
     flash("Category deleted successfully.", "success")
 
     return render_template(

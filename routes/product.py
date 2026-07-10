@@ -32,13 +32,9 @@ def product():
 
     if search:
 
-        sql = """
-        SELECT COUNT(*) AS total
-        FROM product
-        WHERE product_name LIKE ?
-        """
+        sql = "EXEC usp_Product_SearchCount ?"
 
-        value = ('%' + search + '%',)
+        value = (search ,)
 
         res.execute(sql, value)
 
@@ -46,35 +42,10 @@ def product():
 
         total_pages = math.ceil(total / per_page)
 
-        sql = """
-        SELECT
-
-            p.product_id,
-            p.product_name,
-            c.category_name,
-            s.supplier_name,
-            p.price,
-            p.stock,
-            p.image
-
-        FROM product p
-
-        INNER JOIN category c
-            ON p.category_id = c.category_id
-
-        INNER JOIN supplier s
-            ON p.supplier_id = s.supplier_id
-
-        WHERE p.product_name LIKE ?
-
-        ORDER BY p.product_id
-
-        OFFSET ? ROWS
-        FETCH NEXT ? ROWS ONLY
-        """
+        sql = "EXEC usp_Product_SearchPaged ?, ?, ?"
 
         value = (
-            '%' + search + '%',
+            search,
             offset,
             per_page
         )
@@ -87,10 +58,7 @@ def product():
 
     else:
 
-        sql = """
-        SELECT COUNT(*) AS total
-        FROM product
-        """
+        sql = "EXEC usp_Product_ListCount"
 
         res.execute(sql)
 
@@ -98,30 +66,7 @@ def product():
 
         total_pages = math.ceil(total / per_page)
 
-        sql = """
-        SELECT
-
-            p.product_id,
-            p.product_name,
-            c.category_name,
-            s.supplier_name,
-            p.price,
-            p.stock,
-            p.image
-
-        FROM product p
-
-        INNER JOIN category c
-            ON p.category_id = c.category_id
-
-        INNER JOIN supplier s
-            ON p.supplier_id = s.supplier_id
-
-        ORDER BY p.product_id
-
-        OFFSET ? ROWS
-        FETCH NEXT ? ROWS ONLY
-        """
+        sql = "EXEC usp_Product_ListPaged ?, ?"
 
         value = (
             offset,
@@ -155,13 +100,7 @@ def add_product():
 
     res = con.cursor()
 
-    sql = """
-    SELECT
-        category_id,
-        category_name
-    FROM category
-    ORDER BY category_name
-    """
+    sql = "EXEC usp_Category_GetDropdown"
 
     res.execute(sql)
 
@@ -173,13 +112,7 @@ def add_product():
 
     res = con.cursor()
 
-    sql = """
-    SELECT
-        supplier_id,
-        supplier_name
-    FROM supplier
-    ORDER BY supplier_name
-    """
+    sql = "EXEC usp_Supplier_GetAll"
 
     res.execute(sql)
 
@@ -222,11 +155,7 @@ def add_product():
 
         res = con.cursor()
 
-        sql = """
-        SELECT *
-        FROM product
-        WHERE product_name = ?
-        """
+        sql = "EXEC usp_Product_GetByName ?"
 
         res.execute(sql, (product_name,))
 
@@ -293,13 +222,7 @@ def update_product(product_id):
 
     res = con.cursor()
 
-    sql = """
-    SELECT
-        category_id,
-        category_name
-    FROM category
-    ORDER BY category_name
-    """
+    sql = "EXEC usp_Category_GetDropdown"
 
     res.execute(sql)
 
@@ -311,13 +234,7 @@ def update_product(product_id):
 
     res = con.cursor()
 
-    sql = """
-    SELECT
-        supplier_id,
-        supplier_name
-    FROM supplier
-    ORDER BY supplier_name
-    """
+    sql = "EXEC usp_Supplier_GetAll"
 
     res.execute(sql)
 
@@ -340,12 +257,7 @@ def update_product(product_id):
 
         res = con.cursor()
 
-        sql = """
-        SELECT *
-        FROM product
-        WHERE product_name = ?
-        AND product_id <> ?
-        """
+        sql = "EXEC usp_Product_CheckDuplicateForUpdate ?, ?"
 
         res.execute(sql, (product_name, product_id))
 
@@ -357,11 +269,7 @@ def update_product(product_id):
 
             res = con.cursor()
 
-            sql = """
-            SELECT *
-            FROM product
-            WHERE product_id = ?
-            """
+            sql = "EXEC usp_Product_GetById ?"
 
             res.execute(sql, (product_id,))
 
@@ -381,11 +289,7 @@ def update_product(product_id):
 
         res = con.cursor()
 
-        sql = """
-        SELECT image
-        FROM product
-        WHERE product_id = ?
-        """
+        sql = "EXEC usp_Product_GetImageById ? "
 
         res.execute(sql, (product_id,))
 
@@ -431,20 +335,7 @@ def update_product(product_id):
 
         res = con.cursor()
 
-        sql = """
-        UPDATE product
-        SET
-
-            product_name = ?,
-            category_id = ?,
-            supplier_id = ?,
-            price = ?,
-            stock = ?,
-            image = ?,
-            description = ?
-
-        WHERE product_id = ?
-        """
+        sql = "EXEC usp_Product_Update ?, ?, ?, ?, ?, ?, ?, ?"
 
         value = (
             product_name,
@@ -471,11 +362,7 @@ def update_product(product_id):
 
     res = con.cursor()
 
-    sql = """
-    SELECT *
-    FROM product
-    WHERE product_id = ?
-    """
+    sql = "EXEC usp_Product_GetById ?"
 
     res.execute(sql, (product_id,))
 
@@ -503,11 +390,7 @@ def delete_product(product_id):
 
         res = con.cursor()
 
-        sql = """
-        SELECT image
-        FROM product
-        WHERE product_id = ?
-        """
+        sql = "EXEC usp_Product_GetImageById ?"
 
         res.execute(sql, (product_id,))
 
@@ -530,10 +413,7 @@ def delete_product(product_id):
 
         res = con.cursor()
 
-        sql = """
-        DELETE FROM product
-        WHERE product_id = ?
-        """
+        sql = "EXEC usp_Product_Delete ?"
 
         res.execute(sql, (product_id,))
 
@@ -549,25 +429,7 @@ def delete_product(product_id):
 
     res = con.cursor()
 
-    sql = """
-    SELECT
-
-        p.*,
-
-        c.category_name,
-
-        s.supplier_name
-
-    FROM product p
-
-    INNER JOIN category c
-        ON p.category_id = c.category_id
-
-    INNER JOIN supplier s
-        ON p.supplier_id = s.supplier_id
-
-    WHERE p.product_id = ?
-    """
+    sql = "EXEC usp_Product_GetDetailsById ?"
 
     res.execute(sql, (product_id,))
 
