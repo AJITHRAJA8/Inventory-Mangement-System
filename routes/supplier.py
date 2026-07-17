@@ -32,13 +32,9 @@ def supplier():
 
     if search:
 
-        sql = """
-        SELECT COUNT(*) AS total
-        FROM supplier
-        WHERE supplier_name LIKE ?
-        """
+        sql = "EXEC usp_Supplier_SearchCount ?"
 
-        value = ('%' + search + '%',)
+        value = ( search ,)
 
         res.execute(sql, value)
 
@@ -46,17 +42,10 @@ def supplier():
 
         total_pages = math.ceil(total / per_page)
 
-        sql = """
-        SELECT *
-        FROM supplier
-        WHERE supplier_name LIKE ?
-        ORDER BY supplier_id
-        OFFSET ? ROWS
-        FETCH NEXT ? ROWS ONLY
-        """
+        sql = "EXEC usp_Supplier_SearchPaged ?, ?, ?"
 
         value = (
-            '%' + search + '%',
+            search ,
             offset,
             per_page
         )
@@ -69,10 +58,7 @@ def supplier():
 
     else:
 
-        sql = """
-        SELECT COUNT(*) AS total
-        FROM supplier
-        """
+        sql = "EXEC usp_Supplier_GetCount"
 
         res.execute(sql)
 
@@ -80,13 +66,7 @@ def supplier():
 
         total_pages = math.ceil(total / per_page)
 
-        sql = """
-        SELECT *
-        FROM supplier
-        ORDER BY supplier_id
-        OFFSET ? ROWS
-        FETCH NEXT ? ROWS ONLY
-        """
+        sql = "EXEC usp_Supplier_ListPaged ?, ?"
 
         value = (
             offset,
