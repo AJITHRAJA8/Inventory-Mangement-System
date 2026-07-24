@@ -192,7 +192,7 @@ Through this project, I learned:
 
 # 👨‍💻 Author
 
-**Ajith Raja**
+**Ajith R**
 
 🎓 B.Tech Information Technology
 
